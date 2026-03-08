@@ -157,7 +157,6 @@
     <string name="shizuku_not_installed">Shizuku/Sui ist nicht installiert</string>
     <string name="home_screen_swiping">Wischgesten</string>
     <string name="home_screen_swiping_DESC">Nach links oder rechts wischen, um die Seite zu wechseln</string>
-    <string name="special_credits">Besonderer Dank</string>
     <string name="repository_not_found">Paketquelle wurde nicht gefunden</string>
     <string name="cannot_open_link">Der Link kann nicht geöffnet werden</string>
     <string name="has_tethered_network">Von einem bestimmten Netzwerkdienst abhängig</string>

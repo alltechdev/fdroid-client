@@ -159,7 +159,6 @@
     <string name="socket_error_DESC">Серверу не вдалося надати новий пакет</string>
     <string name="home_screen_swiping_DESC">Проведіть пальцем ліворуч або праворуч, щоб переключитися на сторінку</string>
     <string name="repository_not_found">Репозиторій не знайдено</string>
-    <string name="special_credits">Спеціальні кредити</string>
     <string name="shizuku_not_installed">Shizuku/Sui не встановлено</string>
     <string name="cannot_open_link">Не вдається відкрити посилання</string>
     <string name="has_tethered_network">Залежить від певного екземпляра мережевої служби</string>

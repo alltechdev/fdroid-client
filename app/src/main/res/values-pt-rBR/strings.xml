@@ -158,7 +158,6 @@
     <string name="shizuku_not_alive">Shizuku/Sui não está em execução</string>
     <string name="home_screen_swiping_DESC">Deslizar para esquerda ou direita para trocar a página</string>
     <string name="repository_not_found">O repositório não foi encontrado</string>
-    <string name="special_credits">Créditos especiais</string>
     <string name="shizuku_not_installed">Shizuku/Sui não está instalado</string>
     <string name="cannot_open_link">Não foi possível abrir o link</string>
     <string name="has_tethered_network">Depende de uma determinada instância de um serviço de rede</string>

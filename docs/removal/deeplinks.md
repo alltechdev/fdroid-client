@@ -59,3 +59,9 @@ Simplify the app by removing external link handling. The app is meant to be used
 
 - `getInstallPackageName` extension - used for internal install handling
 - `ACTION_SHOW_APP_INFO` intent filter - system app info integration
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |

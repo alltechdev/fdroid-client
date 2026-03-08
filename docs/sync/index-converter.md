@@ -4,7 +4,7 @@ Converts V1 index format to V2 format for unified processing.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/sync/common/IndexConverter.kt`
+**File:** `app/src/main/kotlin/com/atd/store/sync/common/IndexConverter.kt`
 
 The converter enables using V2 processing logic for repositories that only provide V1 format.
 

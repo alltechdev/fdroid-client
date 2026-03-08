@@ -69,7 +69,7 @@ Provides Room database and all DAOs.
 
 | Type | Scope | Description |
 |------|-------|-------------|
-| `DroidifyDatabase` | Singleton | Main Room database |
+| `AtdDatabase` | Singleton | Main Room database |
 | `AppDao` | Singleton | App queries |
 | `RepoDao` | Singleton | Repository queries |
 | `AuthDao` | Singleton | Authentication data |
@@ -82,13 +82,13 @@ Provides Room database and all DAOs.
 ### Adding a New DAO
 
 1. Create the DAO interface in `data/local/dao/`
-2. Add abstract function to `DroidifyDatabase`
+2. Add abstract function to `AtdDatabase`
 3. Add provider in `DatabaseModule`:
 
 ```kotlin
 @Singleton
 @Provides
-fun provideMyDao(db: DroidifyDatabase): MyDao = db.myDao()
+fun provideMyDao(db: AtdDatabase): MyDao = db.myDao()
 ```
 
 ## DatastoreModule
@@ -288,6 +288,14 @@ object FakeNetworkModule {
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `ProxyPreference` injection | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `SettingsExporter` injection | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `CustomButtonRepository` injection | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

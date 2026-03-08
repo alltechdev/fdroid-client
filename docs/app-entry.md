@@ -12,7 +12,7 @@ Main entry points and navigation structure of the app.
 
 ## MainActivity
 
-**File:** `app/src/main/kotlin/com/looker/droidify/MainActivity.kt`
+**File:** `app/src/main/kotlin/com/atd/store/MainActivity.kt`
 
 Legacy fragment-based UI host.
 
@@ -140,7 +140,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 ## MainComposeActivity
 
-**File:** `app/src/main/kotlin/com/looker/droidify/compose/MainComposeActivity.kt`
+**File:** `app/src/main/kotlin/com/atd/store/compose/MainComposeActivity.kt`
 
 Compose-based UI host for newer screens.
 
@@ -152,7 +152,7 @@ class MainComposeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DroidifyTheme {
+            AtdTheme {
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "home") {
                     homeScreen(navController)
@@ -253,7 +253,14 @@ class MainActivity : AppCompatActivity() {
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | Repository navigation (`navigateAddRepository`) | [repository-management.md](removal/repository-management.md) |
 | `repoListScreen`, `repoDetailScreen`, `repoEditScreen` | [repository-management.md](removal/repository-management.md) |
 | `navigateFavourites()` | [favourites.md](removal/favourites.md) |
 | Deep link handling (`deeplinkType()`, `ACTION_VIEW`) | [deeplinks.md](removal/deeplinks.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](changes/package-rename.md) |

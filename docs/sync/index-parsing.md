@@ -4,7 +4,7 @@ Low-level parsing of F-Droid repository index files.
 
 ## Overview
 
-**Location:** `app/src/main/kotlin/com/looker/droidify/index/`
+**Location:** `app/src/main/kotlin/com/atd/store/index/`
 
 | File | Purpose |
 |------|---------|
@@ -201,12 +201,12 @@ Parses OEM-provided repository configurations from system partitions.
 
 ```kotlin
 private val rootDirs = arrayOf("/system", "/product", "/vendor", "/odm", "/oem")
-private val supportedPackageNames = arrayOf("com.looker.droidify", "org.fdroid.fdroid")
+private val supportedPackageNames = arrayOf("com.atd.store", "org.fdroid.fdroid")
 private const val FILE_NAME = "additional_repos.xml"
 ```
 
 Full paths searched:
-- `/system/etc/com.looker.droidify/additional_repos.xml`
+- `/system/etc/com.atd.store/additional_repos.xml`
 - `/system/etc/org.fdroid.fdroid/additional_repos.xml`
 - `/product/etc/...`
 - etc.

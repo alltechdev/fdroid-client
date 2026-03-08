@@ -193,4 +193,5 @@ private suspend fun loadFromFile(): List<CustomButton> = withContext(Dispatchers
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `CustomButtonRepository` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |

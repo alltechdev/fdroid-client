@@ -264,6 +264,7 @@ object RepoModule {
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `favouriteApps` field | [favourites.md](../removal/favourites.md) |
 | Favourite app queries | [favourites.md](../removal/favourites.md) |
 | `antiFeaturesToInclude`/`antiFeaturesToExclude` parameters | [versions-antifeatures.md](../removal/versions-antifeatures.md) |

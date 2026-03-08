@@ -172,7 +172,7 @@ fun SettingsScreen(
 | Personalization | Language, Theme, Dynamic colors, Home swiping |
 | Updates | Auto-update, Notify |
 | Install | Installer type, Legacy component |
-| Credits | FoxyDroid, Droid-ify version |
+| Credits | Droid-ify version |
 
 ### Removed Sections
 
@@ -292,8 +292,16 @@ AsyncImage(
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `CustomButtonsRow`, `CustomButtonEditor` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
 | `TextInputSettingItem` (proxy) | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `AutoSyncSetting`, `WarningBanner` | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
 | Favourites filter chip, favourite toggle button | [favourites.md](../removal/favourites.md) |
 | `ReleaseItem`, `PackageItem`, versions list, anti-features section | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
+| FoxyDroid credits, `special_credits` string | [foxydroid-credits.md](../removal/foxydroid-credits.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

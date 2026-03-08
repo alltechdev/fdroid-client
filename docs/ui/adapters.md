@@ -199,6 +199,7 @@ init {
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `RepositoriesAdapter` | [repository-management.md](../removal/repository-management.md) |
 | `CustomButtonsAdapter` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
 | `FavouriteFragmentAdapter` | [favourites.md](../removal/favourites.md) |

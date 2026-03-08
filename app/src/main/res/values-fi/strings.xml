@@ -157,7 +157,6 @@
     <string name="socket_error_DESC">Palvelin ei pystynyt toimittamaan uutta pakettia.</string>
     <string name="home_screen_swiping_DESC">Salli käyttäjän pyyhkäistä sivujen välillä aloitusnäytössä</string>
     <string name="repository_not_found">Seuraavaa ohjelmavarastoa ei löytynyt</string>
-    <string name="special_credits">Erityiskiitokset</string>
     <string name="shizuku_not_installed">Shizuku ei ole asennettu</string>
     <string name="installation_failed">Asennus epäonnistui</string>
     <string name="installation_failed_DESC">%s asentaminen epäonnistui</string>

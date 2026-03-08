@@ -157,7 +157,6 @@
     <string name="shizuku_not_installed">Shizuku/Sui är inte installerat</string>
     <string name="home_screen_swiping">Svep på sidor</string>
     <string name="home_screen_swiping_DESC">Svep höger eller vänster för att byta sida</string>
-    <string name="special_credits">Särskilda tack</string>
     <string name="repository_not_found">Arkivet hittades inte</string>
     <string name="cannot_open_link">Kan inte öppna länk</string>
     <string name="has_tethered_network">Är beroende av en viss nätverkstjänst</string>

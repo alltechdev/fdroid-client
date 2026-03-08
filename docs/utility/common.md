@@ -229,4 +229,5 @@ Text formatting utilities.
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `Exporter` interface | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

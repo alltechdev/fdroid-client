@@ -239,6 +239,13 @@ try {
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `ProxyPreference` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `ProxyType` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | Proxy settings UI | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

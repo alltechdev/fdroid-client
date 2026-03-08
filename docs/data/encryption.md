@@ -4,7 +4,7 @@ Cryptographic utilities for secure storage and data integrity.
 
 ## Overview
 
-**Location:** `app/src/main/kotlin/com/looker/droidify/data/encryption/`
+**Location:** `app/src/main/kotlin/com/atd/store/data/encryption/`
 
 | File | Purpose |
 |------|---------|

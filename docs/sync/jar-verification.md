@@ -4,7 +4,7 @@ Utilities for verifying signed JAR files from F-Droid repositories.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/sync/utils/JarFile.kt`
+**File:** `app/src/main/kotlin/com/atd/store/sync/utils/JarFile.kt`
 
 Provides extension functions for working with signed JAR files and extracting code signer certificates.
 

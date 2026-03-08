@@ -204,3 +204,9 @@ Removed orphaned translation strings from all locale files:
 - `incompatible_versions`, `incompatible_versions_summary`
 - `delete_apk_on_install`, `delete_apk_on_install_summary`
 - `cleanup_title`, `force_clean_up`, `force_clean_up_DESC`
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |

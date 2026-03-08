@@ -195,3 +195,10 @@ Shell.cmd(installCommand).submit { shellResult ->
 - Root access should be granted consciously by user
 - APK files are deleted after installation
 - Installer package name is set for accountability
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Package: `com.looker.droidify` → `com.atd.store` | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

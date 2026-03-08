@@ -176,7 +176,6 @@
     <string name="uninstalled_application_DESC">%s silindi</string>
     <string name="open_shizuku">Şizuku applikasiyasını aç</string>
     <string name="repository_not_found">Repozitoriya tapılmadı</string>
-    <string name="special_credits">Xüsüsi təşəkkürlər</string>
     <string name="switch_to_default_installer">Defolt rejimə keçin</string>
     <string name="contains_nsfw">Uyğnsuz (NSFW) material mövcuddur</string>
     <string name="label_open_video">Video</string>

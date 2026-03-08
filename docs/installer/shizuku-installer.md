@@ -137,7 +137,7 @@ private fun exec(command: String, stdin: InputStream? = null): ShellResult {
 ### Create Session
 
 ```bash
-pm install-create --user current -i com.looker.droidify -S 12345678
+pm install-create --user current -i com.atd.store -S 12345678
 ```
 
 Returns: `Success: created install session [1234567]`
@@ -248,3 +248,10 @@ On any failure, the session is abandoned to clean up:
 | Persistence | Varies | Permanent |
 | System app install | Limited | Yes |
 | Speed | Fast | Fastest |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Package: `com.looker.droidify` → `com.atd.store` | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

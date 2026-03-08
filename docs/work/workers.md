@@ -232,5 +232,6 @@ class MyWorker @AssistedInject constructor(
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `AutoSync` work constraints | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
 | `toWorkConstraints()` extension | [dead-code-cleanup.md](../removal/dead-code-cleanup.md) |

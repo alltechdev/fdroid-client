@@ -4,7 +4,7 @@ Generic service connection helper for bound services.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/service/Connection.kt`
+**File:** `app/src/main/kotlin/com/atd/store/service/Connection.kt`
 
 Provides a reusable pattern for binding to Android services.
 

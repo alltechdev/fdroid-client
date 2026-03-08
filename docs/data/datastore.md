@@ -376,15 +376,22 @@ override suspend fun import(target: Uri) {
 
 Settings are stored at:
 ```
-/data/data/com.looker.droidify/files/datastore/settings.preferences_pb
+/data/data/com.atd.store/files/datastore/settings.preferences_pb
 ```
 
 ## Removed
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `favouriteApps` | [favourites.md](../removal/favourites.md) |
 | `ProxyPreference` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `AutoSync` | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
 | `Settings export/import` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `sortOrderName()`, `supportedSortOrders()` | [sort-order-ui.md](../removal/sort-order-ui.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

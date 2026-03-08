@@ -154,7 +154,6 @@
     <string name="contains_nsfw">含有工作场所不宜（NSFW）的内容</string>
     <string name="shizuku_not_alive">Shizuku/Sui 未运行</string>
     <string name="shizuku_not_installed">Shizuku/Sui 未安装</string>
-    <string name="special_credits">特别鸣谢</string>
     <string name="home_screen_swiping">页面滑动</string>
     <string name="home_screen_swiping_DESC">左右滑动以切换页面</string>
     <string name="repository_not_found">未找到存储库</string>

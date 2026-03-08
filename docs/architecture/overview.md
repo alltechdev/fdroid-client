@@ -28,9 +28,9 @@ This document describes the high-level architecture of Droid-ify.
 
 ## Application Entry Point
 
-### Droidify.kt
+### AtdStore.kt
 
-The `Droidify` class is the Application subclass and the entry point for the app.
+The `AtdStore` class is the Application subclass and the entry point for the app.
 
 **Key responsibilities:**
 
@@ -207,8 +207,16 @@ if (SdkCheck.isSnowCake) {  // Android 12+
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | Repository management UI | [repository-management.md](../removal/repository-management.md) |
 | Favourites feature | [favourites.md](../removal/favourites.md) |
 | Custom buttons | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
 | Proxy settings | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | Auto-sync settings | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

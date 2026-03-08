@@ -31,7 +31,7 @@ Simplify app by removing user configuration for sync behavior. App now always sy
 - `setAutoSync()` method from `SettingsViewModel`
 
 ### Application
-- `updateSyncJob()` simplified to `scheduleSyncJob()` in `Droidify.kt`
+- `updateSyncJob()` simplified to `scheduleSyncJob()` in `AtdStore.kt`
 - Removed preference collection for sync mode changes
 
 ### Strings Removed
@@ -66,5 +66,11 @@ Simplify app by removing user configuration for sync behavior. App now always sy
 | `compose/settings/SettingsScreen.kt` | Removed UI |
 | `compose/settings/SettingsViewModel.kt` | Removed method and state |
 | `compose/settings/components/WarningBanner.kt` | Deleted |
-| `Droidify.kt` | Simplified sync scheduling |
+| `AtdStore.kt` | Simplified sync scheduling |
 | `app/src/main/res/values*/strings.xml` | Removed strings |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |

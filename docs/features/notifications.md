@@ -349,3 +349,10 @@ setForegroundAsync(notification.toForegroundInfo(NOTIFICATION_ID))
 3. **Provide actions** - Include cancel/retry/open actions where appropriate
 4. **Progress updates** - Sample progress updates to avoid excessive redraws
 5. **Error details** - Include copy-to-clipboard for error details
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Package: `com.looker.droidify` → `com.atd.store` | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

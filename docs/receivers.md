@@ -4,7 +4,7 @@ Broadcast receivers that handle system-level events and inter-component communic
 
 ## Overview
 
-**Location:** `app/src/main/kotlin/com/looker/droidify/receivers/`
+**Location:** `app/src/main/kotlin/com/atd/store/receivers/`
 
 | Receiver | Purpose |
 |----------|---------|
@@ -21,7 +21,7 @@ Handles the "Copy Error" action from installation failure notifications.
 ### Constants
 
 ```kotlin
-const val ACTION_COPY_ERROR = "com.looker.droidify.intent.action.COPY_ERROR"
+const val ACTION_COPY_ERROR = "com.atd.store.intent.action.COPY_ERROR"
 const val EXTRA_ERROR_DETAILS = "error_details"
 const val EXTRA_NOTIFICATION_TAG = "notification_tag"
 const val EXTRA_NOTIFICATION_ID = "notification_id"

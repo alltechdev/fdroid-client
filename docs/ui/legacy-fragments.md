@@ -250,6 +250,7 @@ The app can be configured to launch either activity. Eventually, `MainActivity` 
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | Repository Management Fragments | [repository-management.md](../removal/repository-management.md) |
 | Category/Section Filtering | [category-filtering.md](../removal/category-filtering.md) |
 | Sort order menu in `TabsFragment` | [sort-order-ui.md](../removal/sort-order-ui.md) |

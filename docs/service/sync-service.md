@@ -258,5 +258,12 @@ withContext(NonCancellable) {
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `AutoSync` enum | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
 | Auto-sync scheduling options | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

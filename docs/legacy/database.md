@@ -4,7 +4,7 @@ SQLite database implementation for repositories, products, and installed apps.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/database/Database.kt`
+**File:** `app/src/main/kotlin/com/atd/store/database/Database.kt`
 
 The legacy database uses raw SQLite with custom adapters. Being migrated to Room (see [Database](../data/database.md)).
 
@@ -342,4 +342,5 @@ See [Database](../data/database.md) for the new Room-based system.
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `section` parameter in `query()` | [category-filtering.md](../removal/category-filtering.md) |

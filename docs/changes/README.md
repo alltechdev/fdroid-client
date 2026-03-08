@@ -6,7 +6,10 @@ This directory documents modifications made to existing features from the origin
 
 | Feature | Date | Branch | Document |
 |---------|------|--------|----------|
-| Deprecation Fixes | 2026-03-06 | removals | [deprecation-fixes.md](deprecation-fixes.md) |
+| Package Rename | 2026-03-07 | chore/change-package-name | [package-rename.md](package-rename.md) |
+| App Branding | 2026-03-07 | main | [app-branding.md](app-branding.md) |
+| Database Rename | 2026-03-07 | main | [database-rename.md](database-rename.md) |
+| Deprecation Fixes | 2026-03-06 | main | [deprecation-fixes.md](deprecation-fixes.md) |
 
 ## Purpose
 

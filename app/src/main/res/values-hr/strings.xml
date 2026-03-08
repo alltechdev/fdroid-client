@@ -158,7 +158,6 @@
     <string name="shizuku_not_alive">Shizuku/Sui nije pokrenut</string>
     <string name="home_screen_swiping_DESC">Prijeđite prstom lijevo ili desno za listanje stranica</string>
     <string name="repository_not_found">Repozitorij nije pronađen</string>
-    <string name="special_credits">Posebne zasluge</string>
     <string name="shizuku_not_installed">Shizuku/Sui nije instaliran</string>
     <string name="has_tethered_network">Ovisi od određenih instanci mrežne usluge</string>
     <string name="cannot_open_link">Nije moguće otvoriti poveznicu</string>

@@ -162,7 +162,6 @@
     <string name="connection_error_DESC">לא היה ניתן להתחבר לשרת</string>
     <string name="has_tethered_network">תלוי בשירות רשת מסוימת</string>
     <string name="home_screen_swiping_DESC">החלק שמאלה או ימינה כדי להחליף עמוד</string>
-    <string name="special_credits">קרדיטים מיוחדים</string>
     <string name="contains_nsfw">מכיל תוכן שאינו בטוח (nsfw)</string>
     <string name="home_screen_swiping">החלקה בין דפים</string>
     <string name="cannot_open_link">לא ניתן לפתוח קישור</string>

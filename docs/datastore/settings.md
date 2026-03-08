@@ -244,6 +244,7 @@ Dynamic themes require Android 12+ (Snow Cake).
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `ProxyPreference` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `export()` / `import()` methods | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
 | `AutoSync` enum, `setAutoSync()` | [auto-sync-setting.md](../removal/auto-sync-setting.md) |

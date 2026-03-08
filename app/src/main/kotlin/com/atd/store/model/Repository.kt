@@ -1,0 +1,105 @@
+package com.atd.store.model
+
+import java.net.URL
+
+data class Repository(
+    var id: Long,
+    val address: String,
+    val mirrors: List<String>,
+    val name: String,
+    val description: String,
+    val version: Int,
+    val enabled: Boolean,
+    val fingerprint: String,
+    val lastModified: String,
+    val entityTag: String,
+    val updated: Long,
+    val timestamp: Long,
+    val authentication: String,
+) {
+
+    fun edit(address: String, fingerprint: String, authentication: String): Repository {
+        val isAddressChanged = this.address != address
+        val isFingerprintChanged = this.fingerprint != fingerprint
+        val shouldForceUpdate = isAddressChanged || isFingerprintChanged
+        return copy(
+            address = address,
+            fingerprint = fingerprint,
+            lastModified = if (shouldForceUpdate) "" else lastModified,
+            entityTag = if (shouldForceUpdate) "" else entityTag,
+            authentication = authentication,
+        )
+    }
+
+    fun update(
+        mirrors: List<String>,
+        name: String,
+        description: String,
+        version: Int,
+        lastModified: String,
+        entityTag: String,
+        timestamp: Long,
+    ): Repository {
+        return copy(
+            mirrors = mirrors,
+            name = name,
+            description = description,
+            version = if (version >= 0) version else this.version,
+            lastModified = lastModified,
+            entityTag = entityTag,
+            updated = System.currentTimeMillis(),
+            timestamp = timestamp,
+        )
+    }
+
+    fun enable(enabled: Boolean): Repository {
+        return copy(enabled = enabled, lastModified = "", entityTag = "")
+    }
+
+    companion object {
+
+        const val HARDCODED_REPO_ADDRESS = "https://repo.dietdroid.com/fdroid/repo"
+
+        fun newRepository(
+            address: String,
+            fingerprint: String,
+            authentication: String,
+        ): Repository {
+            val name = try {
+                URL(address).let { "${it.host}${it.path}" }
+            } catch (e: Exception) {
+                address
+            }
+            return defaultRepository(address, name, "", 0, true, fingerprint, authentication)
+        }
+
+        fun defaultRepository(
+            address: String,
+            name: String,
+            description: String,
+            version: Int = 21,
+            enabled: Boolean = false,
+            fingerprint: String,
+            authentication: String = "",
+        ): Repository {
+            return Repository(
+                -1, address, emptyList(), name, description, version, enabled,
+                fingerprint, "", "", 0L, 0L, authentication,
+            )
+        }
+
+        val defaultRepositories = listOf(
+            defaultRepository(
+                address = HARDCODED_REPO_ADDRESS,
+                name = "DietDroid",
+                description = "DietDroid F-Droid repository",
+                enabled = true,
+                fingerprint = "",
+            ),
+        )
+
+        fun newRepos(): List<Repository> = listOf()
+
+        fun addressesToRemove(): List<String> = listOf()
+    }
+}

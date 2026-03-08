@@ -173,7 +173,6 @@
     <string name="repository_not_found">Sekojošais repozitorijs netika atrasts</string>
     <string name="shizuku_not_alive">Shizuku/Sui nav palaists</string>
     <string name="open_shizuku">Atvērt Shizuku</string>
-    <string name="special_credits">Īpašs paldies</string>
     <string name="switch_to_default_installer">Izmantot noklusējuma uzstādītāju</string>
     <string name="contains_nsfw">Satur darba vietai nepiemērotu saturu</string>
     <string name="label_open_video">Video</string>

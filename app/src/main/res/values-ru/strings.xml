@@ -157,7 +157,6 @@
     <string name="contains_nsfw">Содержит NSFW-материал</string>
     <string name="shizuku_not_alive">Shizuku/Sui не запущен</string>
     <string name="shizuku_not_installed">Shizuku/Sui не установлен</string>
-    <string name="special_credits">Особая благодарность</string>
     <string name="home_screen_swiping">Использовать жесты</string>
     <string name="home_screen_swiping_DESC">Переключать страницу смахиванием вправо или влево</string>
     <string name="repository_not_found">Репозитории не найдены</string>

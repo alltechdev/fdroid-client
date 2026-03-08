@@ -6,7 +6,7 @@ Every Kotlin source file in the project (255 files total).
 
 | File | Purpose |
 |------|---------|
-| `Droidify.kt` | Application class - DI init, receivers, startup |
+| `AtdStore.kt` | Application class - DI init, receivers, startup |
 | `MainActivity.kt` | Legacy UI host - fragment navigation, theming |
 
 ## compose/
@@ -60,7 +60,7 @@ Every Kotlin source file in the project (255 files total).
 | File | Purpose |
 |------|---------|
 | `Color.kt` | Color definitions |
-| `Theme.kt` | DroidifyTheme composable |
+| `Theme.kt` | AtdTheme composable |
 | `Type.kt` | Typography definitions |
 
 ### compose/
@@ -95,7 +95,7 @@ Every Kotlin source file in the project (255 files total).
 ### data/local/
 | File | Purpose |
 |------|---------|
-| `DroidifyDatabase.kt` | Room database definition |
+| `AtdDatabase.kt` | Room database definition |
 
 ### data/local/converters/
 | File | Purpose |
@@ -453,6 +453,7 @@ Every Kotlin source file in the project (255 files total).
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](changes/package-rename.md) |
 | `FavouritesFragment.kt`, `FavouritesViewModel.kt`, `FavouriteFragmentAdapter.kt` | [favourites.md](removal/favourites.md) |
 | `RepositoriesFragment.kt`, `EditRepositoryFragment.kt`, `RepositoryFragment.kt`, `RepositoryViewModel.kt`, `RepositoriesAdapter.kt` | [repository-management.md](removal/repository-management.md) |
 | `CustomButtonsAdapter.kt`, `CustomButtonRepository.kt`, `CustomButton.kt` | [custom-buttons-and-settings.md](removal/custom-buttons-and-settings.md) |
@@ -461,3 +462,9 @@ Every Kotlin source file in the project (255 files total).
 | `ReleaseItem.kt` | [versions-antifeatures.md](removal/versions-antifeatures.md) |
 | `AntiFeatureEntity.kt` | [versions-antifeatures.md](removal/versions-antifeatures.md) |
 | `ic_tune.xml` | [app-info-uninstall-actions.md](removal/app-info-uninstall-actions.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](changes/package-rename.md) |

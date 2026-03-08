@@ -4,7 +4,7 @@ Runtime permission handling utilities.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/common/Permissions.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/common/Permissions.kt`
 
 Provides helpers for checking and requesting Android permissions.
 

@@ -161,6 +161,5 @@
     <string name="home_screen_swiping_DESC">Leisti vartotojui braukti tarp puslapių pagrindiniame ekrane</string>
     <string name="socket_error_DESC">Serveriui nepavyko pateikti naujo paketo.</string>
     <string name="connection_error_DESC">Nepavyko prisijungti prie serverio</string>
-    <string name="special_credits">Specialūs kreditai</string>
     <string name="cannot_open_link">Negalima atidaryti nuorodos</string>
 </resources>

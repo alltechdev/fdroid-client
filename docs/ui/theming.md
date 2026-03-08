@@ -10,13 +10,13 @@ Droid-ify uses Material 3 theming with support for light/dark modes, dynamic col
 | `compose/theme/Color.kt` | Color palette definitions |
 | `compose/theme/Type.kt` | Typography definitions |
 
-## DroidifyTheme
+## AtdTheme
 
 The main theme composable:
 
 ```kotlin
 @Composable
-fun DroidifyTheme(
+fun AtdTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
@@ -36,7 +36,7 @@ fun DroidifyTheme(
 ```kotlin
 // In MainComposeActivity
 setContent {
-    DroidifyTheme {
+    AtdTheme {
         // App content
     }
 }
@@ -45,7 +45,7 @@ setContent {
 setContent {
     val settings by settingsRepository.data.collectAsStateWithLifecycle()
 
-    DroidifyTheme(
+    AtdTheme(
         darkTheme = when (settings.theme) {
             Theme.LIGHT -> false
             Theme.DARK, Theme.AMOLED -> true
@@ -234,7 +234,7 @@ For custom colors not in Material 3, use `CompositionLocal`:
 val LocalMyCustomColor = staticCompositionLocalOf { Color.Unspecified }
 
 @Composable
-fun DroidifyTheme(
+fun AtdTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
@@ -284,8 +284,15 @@ Include theme in previews:
 @Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun MyComponentPreview() {
-    DroidifyTheme {
+    AtdTheme {
         MyComponent()
     }
 }
 ```
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

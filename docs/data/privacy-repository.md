@@ -4,7 +4,7 @@ Repository for privacy-related data: Reproducible Build logs and download statis
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/data/PrivacyRepository.kt`
+**File:** `app/src/main/kotlin/com/atd/store/data/PrivacyRepository.kt`
 
 Manages data related to app transparency and popularity metrics.
 

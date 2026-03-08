@@ -456,3 +456,10 @@ if (actual != null && expected.assert(actual)) {
     // Signature matches
 }
 ```
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Package: `com.looker.droidify` → `com.atd.store` | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

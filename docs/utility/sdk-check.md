@@ -4,7 +4,7 @@ Utilities for Android SDK version checks and conditional execution.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/common/SdkCheck.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/common/SdkCheck.kt`
 
 Provides type-safe SDK version checks with proper Android lint annotations.
 

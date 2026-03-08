@@ -154,7 +154,6 @@
     <string name="shizuku_not_alive">Shizuku/Sui 未在運行中</string>
     <string name="shizuku_not_installed">Shizuku/Sui 未安裝</string>
     <string name="contains_nsfw">包含不適宜工作環境內容</string>
-    <string name="special_credits">特別感謝</string>
     <string name="home_screen_swiping">頁面滑動</string>
     <string name="home_screen_swiping_DESC">左右滑動來切換頁面</string>
     <string name="repository_not_found">未找到儲存庫</string>

@@ -295,6 +295,13 @@ fun testNavigation() {
 
 | Route | Removal Doc |
 |-------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `RepoList` | [repository-management.md](../removal/repository-management.md) |
 | `RepoDetail` | [repository-management.md](../removal/repository-management.md) |
 | `RepoEdit` | [repository-management.md](../removal/repository-management.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

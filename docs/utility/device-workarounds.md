@@ -4,7 +4,7 @@ OEM-specific detection and workarounds for non-standard Android implementations.
 
 ## Overview
 
-**Location:** `app/src/main/kotlin/com/looker/droidify/utility/common/device/`
+**Location:** `app/src/main/kotlin/com/atd/store/utility/common/device/`
 
 Some Android device manufacturers modify the system in ways that break standard app installation. These utilities detect and work around such issues.
 

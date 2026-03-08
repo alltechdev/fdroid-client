@@ -4,7 +4,7 @@ Per-app preferences for update behavior, stored separately from the main databas
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/content/ProductPreferences.kt`
+**File:** `app/src/main/kotlin/com/atd/store/content/ProductPreferences.kt`
 
 Product preferences allow users to ignore updates for specific apps, either entirely or for specific versions.
 

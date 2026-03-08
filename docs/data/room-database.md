@@ -4,7 +4,7 @@ Modern Room database for app, repository, and sync data.
 
 ## Overview
 
-**File:** `data/local/DroidifyDatabase.kt`
+**File:** `data/local/AtdDatabase.kt`
 
 Primary data storage using Room with optimized settings.
 
@@ -50,7 +50,7 @@ Primary data storage using Room with optimized settings.
     ],
 )
 @TypeConverters(PermissionConverter::class, Converters::class)
-abstract class DroidifyDatabase : RoomDatabase() {
+abstract class AtdDatabase : RoomDatabase() {
     abstract fun appDao(): AppDao
     abstract fun repoDao(): RepoDao
     abstract fun authDao(): AuthDao
@@ -64,11 +64,11 @@ abstract class DroidifyDatabase : RoomDatabase() {
 ## Database Builder
 
 ```kotlin
-fun droidifyDatabase(context: Context): DroidifyDatabase = Room
+fun atdDatabase(context: Context): AtdDatabase = Room
     .databaseBuilder(
         context = context,
-        klass = DroidifyDatabase::class.java,
-        name = "droidify_room",
+        klass = AtdDatabase::class.java,
+        name = "atd_room",
     )
     .fallbackToDestructiveMigration(true)
     .addCallback(
@@ -199,4 +199,12 @@ Database wipes on schema changes since data can be re-synced from repositories.
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `AntiFeatureEntity`, `AntiFeatureAppRelation`, `AntiFeatureRepoRelation` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |
+| Database name `atd_store` → `atd_room` | [database-rename.md](../changes/database-rename.md) |

@@ -151,7 +151,6 @@
     <string name="prefs_language_title">ভাষা</string>
     <string name="cannot_open_link">লিংকটি ওপেন করা সম্ভব হয়নি</string>
     <string name="uninstalled_application">অপসারিত</string>
-    <string name="special_credits">বিশেষ কৃতজ্ঞতাস্বীকার</string>
     <string name="error_shizuku_not_granted_DESC">শিজুকু সেবার অনুমতি দেওয়া হয়নি। শিজুকু অ্যাপটি দেখো</string>
     <string name="contains_nsfw">নিষিদ্ধ বিষয়বস্ত বিদ্যমান</string>
     <string name="label_open_video">ভিডিও</string>

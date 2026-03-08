@@ -4,7 +4,7 @@ URL and intent parsing for app navigation via deeplinks.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/common/Deeplinks.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/common/Deeplinks.kt`
 
 Handles various URL schemes and intents to navigate to apps, repositories, and search.
 
@@ -48,7 +48,7 @@ fun Intent.deeplinkType(): DeeplinkType?
 ```
 
 **Examples:**
-- `package:com.looker.droidify` → AppDetail("com.looker.droidify")
+- `package:com.atd.store` → AppDetail("com.atd.store")
 - `fdroid.app:org.mozilla.firefox` → AppDetail("org.mozilla.firefox")
 
 ### FDroid Repo Scheme
@@ -218,7 +218,7 @@ override fun handleIntent(intent: Intent?) {
 ```bash
 # Open app detail
 adb shell am start -a android.intent.action.VIEW \
-    -d "package:com.looker.droidify"
+    -d "package:com.atd.store"
 
 # Add repository
 adb shell am start -a android.intent.action.VIEW \
@@ -237,5 +237,12 @@ adb shell am start -a android.intent.action.VIEW \
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `shareUrl()` | [share-source-actions.md](../removal/share-source-actions.md) |
 | `DeeplinkType`, `deeplinkType()`, all intent filters | [deeplinks.md](../removal/deeplinks.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

@@ -159,7 +159,6 @@
     <string name="home_screen_swiping_DESC">Veeg naar links of rechts om de pagina te wisselen</string>
     <string name="home_screen_swiping">Pagina vegen</string>
     <string name="cannot_open_link">Kan link niet openen</string>
-    <string name="special_credits">Speciale dank</string>
     <string name="contains_nsfw">Bevat inhoud ongeschikt voor (NSFW-) werk</string>
     <string name="installation_failed_DESC">%s is niet geïnstalleerd</string>
     <string name="uninstalled_application">Verwijderd</string>

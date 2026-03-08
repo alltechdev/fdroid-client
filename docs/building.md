@@ -52,6 +52,15 @@ sdk.dir=/path/to/your/android/sdk
 
 **Device not detected**: Enable USB Debugging in Developer Options
 
----
+## Changes
 
-*For contributing guidelines, see [CONTRIBUTING.md](../CONTRIBUTING.md)*
+| Change | Change Doc |
+|--------|------------|
+| Package: `com.looker.droidify` → `com.atd.store` | [package-rename.md](changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](changes/app-branding.md) |
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `CONTRIBUTING.md` | Deleted (Droid-ify branding) |

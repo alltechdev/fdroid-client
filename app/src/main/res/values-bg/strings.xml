@@ -157,7 +157,6 @@
     <string name="shizuku_not_alive">Shizuku/Sui не работи</string>
     <string name="home_screen_swiping_DESC">Плъзнете наляво или надясно, за да превключите страницата</string>
     <string name="repository_not_found">Хранилището не беше намерено</string>
-    <string name="special_credits">Специални благодарности</string>
     <string name="shizuku_not_installed">Shizuku не е инсталиран</string>
     <string name="cannot_open_link">Връзката не може да се отвори</string>
     <string name="has_tethered_network">Зависи от определена инстанция на мрежова услуга</string>

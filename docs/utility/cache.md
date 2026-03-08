@@ -4,7 +4,7 @@ File caching utilities for APKs, images, and temporary files with automatic clea
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/common/cache/Cache.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/common/cache/Cache.kt`
 
 The Cache object manages all cached files with automatic cleanup based on age.
 

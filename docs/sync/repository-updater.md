@@ -75,7 +75,7 @@ object RepositoryUpdater {
 }
 ```
 
-Called from `Droidify.kt` during app startup:
+Called from `AtdStore.kt` during app startup:
 
 ```kotlin
 appScope.launch {
@@ -326,3 +326,9 @@ data class IndexFile(
     val file: File,
 )
 ```
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |

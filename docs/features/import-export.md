@@ -349,5 +349,12 @@ override suspend fun import(target: Uri): Settings = withContext(ioDispatcher) {
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `Settings Import/Export` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `Custom Buttons Import/Export` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

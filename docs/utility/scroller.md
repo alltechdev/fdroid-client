@@ -4,7 +4,7 @@ Smooth scroll and fast scroller support for RecyclerView.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/common/Scroller.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/common/Scroller.kt`
 
 Provides utilities for scroll behavior in lists.
 

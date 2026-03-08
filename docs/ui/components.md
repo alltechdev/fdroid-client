@@ -202,7 +202,7 @@ fun MyComponent(
 @Preview
 @Composable
 private fun MyComponentPreview() {
-    DroidifyTheme {
+    AtdTheme {
         MyComponent(
             title = "Preview",
             onClick = {},
@@ -222,6 +222,14 @@ private fun MyComponentPreview() {
 
 | Component | Removal Doc |
 |-----------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `CustomButtonsRow` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
 | `CustomButtonsSettingItem` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
 | `TextInputSettingItem` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

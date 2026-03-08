@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="application_name" translatable="false">Droid-ify</string>
+    <string name="application_name" translatable="false">ATD Store</string>
     <string name="cleartext_allowed" translatable="false">false</string>
     <string name="action_failed">Action failed</string>
     <string name="add_repository">Add repository</string>
@@ -155,7 +155,6 @@
     <string name="size">Size</string>
     <string name="skip">Skip</string>
     <string name="source_code_no_longer_available">Source code no longer available</string>
-    <string name="special_credits">Special credits</string>
     <string name="suggested">Suggested</string>
     <string name="switch_to_default_installer">Switch to default</string>
 

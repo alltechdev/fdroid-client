@@ -154,7 +154,6 @@
     <string name="connection_error_DESC">Δε μπόρεσε να συνδεθεί με τον διακομιστή</string>
     <string name="contains_nsfw">Περιέχει μη ασφαλές για εργασία (NSFW) περιεχόμενο</string>
     <string name="shizuku_not_alive">Το Shizuku/Sui δεν εκτελείται</string>
-    <string name="special_credits">Ειδικά εύσηαμα</string>
     <string name="shizuku_not_installed">Το Shizuku/Sui δεν είναι εγκατεστημένο</string>
     <string name="home_screen_swiping">Κύλιση Σελίδας</string>
     <string name="home_screen_swiping_DESC">Κυλίστε αριστερά ή δεξιά για να αλλάξετε σελίδα</string>

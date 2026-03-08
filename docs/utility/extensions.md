@@ -4,7 +4,7 @@ Extension functions organized by type and purpose.
 
 ## Overview
 
-**Location:** `app/src/main/kotlin/com/looker/droidify/utility/`
+**Location:** `app/src/main/kotlin/com/atd/store/utility/`
 
 Extensions are organized into two packages:
 - `utility/common/extension/` - General-purpose extensions

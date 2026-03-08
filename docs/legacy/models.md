@@ -4,7 +4,7 @@ Data models used by the legacy database and sync systems.
 
 ## Overview
 
-**Location:** `app/src/main/kotlin/com/looker/droidify/model/`
+**Location:** `app/src/main/kotlin/com/atd/store/model/`
 
 These models are used with the legacy SQLite database. New code should use Room entities.
 
@@ -301,4 +301,5 @@ The new models use proper foreign keys and are documented in [Models](../data/mo
 
 | Model | Removal Doc |
 |-------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `ProductItem.Section` | [category-filtering.md](../removal/category-filtering.md) |

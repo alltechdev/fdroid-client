@@ -157,7 +157,6 @@
     <string name="socket_error_DESC">A kiszolgáló nem tudott új csomagot biztosítani</string>
     <string name="home_screen_swiping_DESC">Csúsztassa ujját balra vagy jobbra az oldal váltásához</string>
     <string name="repository_not_found">A tároló nem található</string>
-    <string name="special_credits">Külön köszönet</string>
     <string name="shizuku_not_installed">A Shizuku/Sui nincs telepítve</string>
     <string name="has_tethered_network">Egy hálózati szolgáltatás egy bizonyos példányától függ</string>
     <string name="cannot_open_link">A hivatkozás nem nyitható meg</string>

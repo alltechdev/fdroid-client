@@ -4,7 +4,7 @@ Custom RecyclerView adapters and utilities for the legacy View-based UI.
 
 ## Overview
 
-**Location:** `app/src/main/kotlin/com/looker/droidify/widget/`
+**Location:** `app/src/main/kotlin/com/atd/store/widget/`
 
 | Widget | Purpose |
 |--------|---------|
@@ -261,7 +261,7 @@ override fun setIconified(iconify: Boolean) {
 ### Usage
 
 ```kotlin
-<com.looker.droidify.widget.FocusSearchView
+<com.atd.store.widget.FocusSearchView
     android:id="@+id/search_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />

@@ -225,6 +225,7 @@ class MyFragment : ScreenFragment() {
 
 | Fragment | Removal Doc |
 |----------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `RepositoriesFragment` | [repository-management.md](../removal/repository-management.md) |
 | `RepositoryFragment` | [repository-management.md](../removal/repository-management.md) |
 | `EditRepositoryFragment` | [repository-management.md](../removal/repository-management.md) |

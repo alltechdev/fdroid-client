@@ -21,6 +21,7 @@ This directory documents features and code that have been removed from the codeb
 | Android TV Support | 2026-03-07 | main | [tv-support.md](tv-support.md) |
 | Versions & Anti-Features Sections | 2026-03-07 | main | [versions-antifeatures.md](versions-antifeatures.md) |
 | App Info & Uninstall Actions | 2026-03-07 | main | [app-info-uninstall-actions.md](app-info-uninstall-actions.md) |
+| FoxyDroid Credits | 2026-03-07 | main | [foxydroid-credits.md](foxydroid-credits.md) |
 
 ## Purpose
 

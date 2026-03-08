@@ -159,7 +159,6 @@
     <string name="contains_nsfw">يحتوي على غير آمن للعمل (NSFW)</string>
     <string name="shizuku_not_alive">Shizuku/Sui لا يعمل</string>
     <string name="shizuku_not_installed">Shizuku/Sui غير مثبت</string>
-    <string name="special_credits">الإشادات الخاصة</string>
     <string name="home_screen_swiping">تمرير الصفحات</string>
     <string name="home_screen_swiping_DESC">اسحب لليسار أو لليمين لتبديل الصفحة</string>
     <string name="repository_not_found">لم يُعثَر على المستودع</string>

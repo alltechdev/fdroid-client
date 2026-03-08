@@ -229,7 +229,7 @@ class FavouritesViewModel @Inject constructor(
 Favorites persist across app restarts via DataStore:
 
 ```kotlin
-// Settings stored in: data/data/com.looker.droidify/files/datastore/settings.json
+// Settings stored in: data/data/com.atd.store/files/datastore/settings.json
 {
     "favouriteApps": [
         "com.example.app1",
@@ -275,4 +275,5 @@ settingsRepository.data
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `Favourites` | [favourites.md](../removal/favourites.md) |

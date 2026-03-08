@@ -114,29 +114,29 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(context: Context): DroidifyDatabase =
-        droidifyDatabase(context)
+    fun provideDatabase(context: Context): AtdDatabase =
+        atdDatabase(context)
 
     @Singleton @Provides
-    fun provideAppDao(db: DroidifyDatabase): AppDao = db.appDao()
+    fun provideAppDao(db: AtdDatabase): AppDao = db.appDao()
 
     @Singleton @Provides
-    fun provideRepoDao(db: DroidifyDatabase): RepoDao = db.repoDao()
+    fun provideRepoDao(db: AtdDatabase): RepoDao = db.repoDao()
 
     @Singleton @Provides
-    fun provideAuthDao(db: DroidifyDatabase): AuthDao = db.authDao()
+    fun provideAuthDao(db: AtdDatabase): AuthDao = db.authDao()
 
     @Singleton @Provides
-    fun provideInstallDao(db: DroidifyDatabase): InstalledDao = db.installedDao()
+    fun provideInstallDao(db: AtdDatabase): InstalledDao = db.installedDao()
 
     @Singleton @Provides
-    fun provideIndexDao(db: DroidifyDatabase): IndexDao = db.indexDao()
+    fun provideIndexDao(db: AtdDatabase): IndexDao = db.indexDao()
 
     @Singleton @Provides
-    fun provideRBLogDao(db: DroidifyDatabase): RBLogDao = db.rbLogDao()
+    fun provideRBLogDao(db: AtdDatabase): RBLogDao = db.rbLogDao()
 
     @Singleton @Provides
-    fun provideDownloadStatsDao(db: DroidifyDatabase): DownloadStatsDao =
+    fun provideDownloadStatsDao(db: AtdDatabase): DownloadStatsDao =
         db.downloadStatsDao()
 
     @Singleton @Provides
@@ -313,6 +313,14 @@ Note: Uses `ViewModelComponent` not `SingletonComponent` for ViewModel lifecycle
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `ProxyPreference` provider | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `SettingsExporter` provider | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `CustomButtonRepository` provider | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

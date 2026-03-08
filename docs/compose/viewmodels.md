@@ -233,6 +233,7 @@ fun showSnackbar(@StringRes messageRes: Int) {
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | Import/export methods in `SettingsViewModel` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
 | `customButtonRepository` dependency | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
 | Cleanup interval configuration | [version-settings.md](../removal/version-settings.md) |

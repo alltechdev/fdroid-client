@@ -4,7 +4,7 @@ Jackson-based serialization for legacy models.
 
 ## Overview
 
-**Location:** `app/src/main/kotlin/com/looker/droidify/utility/serialization/`
+**Location:** `app/src/main/kotlin/com/atd/store/utility/serialization/`
 
 Uses Jackson Streaming API for efficient JSON serialization/deserialization.
 
@@ -249,4 +249,5 @@ New Room-based storage uses native SQLite types and doesn't need this serializat
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | Export/Import (backup files) | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

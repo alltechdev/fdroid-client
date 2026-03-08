@@ -46,7 +46,7 @@ Removed the App Detail Links (Custom Buttons) feature, the APK Cleanup Interval 
 | Repository Impl | `datastore/PreferenceSettingsRepository.kt` | `CLEAN_UP_INTERVAL` key and setter removed |
 | Settings ViewModel | `compose/settings/SettingsViewModel.kt` | `cleanUpIntervals`, `setCleanUpInterval`, `forceCleanup` removed |
 | Settings Screen | `compose/settings/SettingsScreen.kt` | Cleanup interval selector and force cleanup button removed |
-| Application | `Droidify.kt` | Settings listener for cleanup interval changes removed |
+| Application | `AtdStore.kt` | Settings listener for cleanup interval changes removed |
 
 ### Behavior change
 
@@ -109,3 +109,9 @@ if (result == InstallState.Installed) {
 - Custom buttons data file (`custom_buttons.json`) can be manually deleted from app data
 - No user action needed - behavior changes are automatic
 - PreferencesKeys for removed settings still exist in stored preferences but are ignored
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |

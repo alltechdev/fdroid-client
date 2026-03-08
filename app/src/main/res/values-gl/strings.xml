@@ -172,7 +172,6 @@
     <string name="select_installer">Seleccionar instalador</string>
     <string name="has_tethered_network">Vinculado a un determinado servizo de rede</string>
     <string name="insufficient_storage">Espazo insuficiente</string>
-    <string name="special_credits">Créditos especiais</string>
     <string name="installation_failed_DESC">Fallo ao instalar %s</string>
     <string name="insufficient_storage_DESC">Non hai suficiente espazo libre no dispositivo para instalar esta aplicación. Intenta limpar algo de espazo</string>
     <string name="contains_nsfw">Contén contido para adultos</string>

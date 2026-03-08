@@ -18,7 +18,7 @@ Removed three version/signature related settings that are now hardcoded to `fals
 | Repository Impl | `datastore/PreferenceSettingsRepository.kt` | `UNSTABLE_UPDATES` key and setter removed |
 | Settings ViewModel | `compose/settings/SettingsViewModel.kt` | `setUnstableUpdates` method removed |
 | Settings Screen | `compose/settings/SettingsScreen.kt` | Toggle switch removed |
-| Application | `Droidify.kt` | Settings listener that triggered force sync removed |
+| Application | `AtdStore.kt` | Settings listener that triggered force sync removed |
 | Sync Service | `service/SyncService.kt` | Settings fetch replaced with hardcoded `false` |
 
 ### Behavior change
@@ -111,3 +111,9 @@ MessageDialog(Message.ReleaseSignatureMismatch).show(childFragmentManager)
 - PreferencesKeys for removed settings still exist in stored preferences but are ignored
 - These changes improve security by preventing signature bypass
 - Users who previously used unstable updates will now only see stable versions
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |

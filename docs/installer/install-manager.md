@@ -108,7 +108,7 @@ suspend infix fun uninstall(packageName: PackageName) {
 
 ## Initialization
 
-The `InstallManager` is started in `Droidify.kt`:
+The `InstallManager` is started in `AtdStore.kt`:
 
 ```kotlin
 // In Application.onCreate()
@@ -298,3 +298,9 @@ class AppDetailViewModel @Inject constructor(
     }
 }
 ```
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |

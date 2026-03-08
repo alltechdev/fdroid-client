@@ -313,6 +313,7 @@ Previously, settings were automatically serialized to JSON via kotlinx.serializa
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](changes/package-rename.md) |
 | Proxy settings | [proxy-and-backup.md](removal/proxy-and-backup.md) |
 | Import/Export | [custom-buttons-and-settings.md](removal/custom-buttons-and-settings.md) |
 | Custom buttons | [custom-buttons-and-settings.md](removal/custom-buttons-and-settings.md) |

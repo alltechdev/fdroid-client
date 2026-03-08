@@ -4,7 +4,7 @@ Generic interface for data export/import operations.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/common/Exporter.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/common/Exporter.kt`
 
 Provides a standardized interface for exporting and importing various data types.
 
@@ -243,6 +243,7 @@ suspend fun safeExport(): ExportResult {
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `Exporter<T>` interface | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `RepositoryExporter` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
 | `SettingsExporter` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

@@ -4,7 +4,7 @@ Custom drawable wrappers for consistent icon rendering.
 
 ## Overview
 
-**Location:** `app/src/main/kotlin/com/looker/droidify/graphics/`
+**Location:** `app/src/main/kotlin/com/atd/store/graphics/`
 
 | Class | Purpose |
 |-------|---------|

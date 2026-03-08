@@ -223,4 +223,14 @@ docs/
 
 ## Removed
 
+| Feature | Removal Doc |
+|---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](changes/package-rename.md) |
+
 Note: Some features referenced in this plan have been removed. See `docs/removal/` for details.
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| App branding Droid-ify → ATD Store | [app-branding.md](changes/app-branding.md) |

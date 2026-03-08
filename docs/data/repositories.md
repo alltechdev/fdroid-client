@@ -402,5 +402,12 @@ fun getApps(): Flow<List<App>> = appDao.streamAll()
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | Sort order UI selector (sort order still used internally) | [sort-order-ui.md](../removal/sort-order-ui.md) |
 | `antiFeaturesToInclude`/`antiFeaturesToExclude` parameters | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

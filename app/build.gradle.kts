@@ -11,18 +11,18 @@ plugins {
 
 android {
     val latestVersionName = "0.7.0"
-    namespace = "com.looker.droidify"
+    namespace = "com.atd.store"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.looker.droidify"
+        applicationId = "com.atd.store"
         minSdk = 23
         versionName = latestVersionName
         versionCode = 700
 
-        testInstrumentationRunner = "com.looker.droidify.TestRunner"
+        testInstrumentationRunner = "com.atd.store.TestRunner"
     }
 
     androidResources.generateLocaleConfig = true

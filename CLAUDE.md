@@ -29,7 +29,7 @@ Simplified F-Droid client for Android, forked from Droid-ify. Streamlined experi
 ./gradlew :app:testDebugUnitTest
 
 # Run a single test class
-./gradlew :app:testDebugUnitTest --tests "com.looker.droidify.data.local.dao.RepoDaoTest"
+./gradlew :app:testDebugUnitTest --tests "com.atd.store.data.local.dao.RepoDaoTest"
 
 # Clean build
 ./gradlew clean --refresh-dependencies
@@ -61,7 +61,7 @@ APK output: `app/build/outputs/apk/`
 - Single shared `HttpClient` across the app (injected via Hilt)
 
 **Data Layer** (`data/local/`):
-- Room database `DroidifyDatabase` with DAOs for apps, repos, installed packages
+- Room database `AtdDatabase` with DAOs for apps, repos, installed packages
 - Repositories: `AppRepository`, `RepoRepository`, `InstalledRepository`
 
 **Background Work**:
@@ -179,6 +179,27 @@ The `docs/` directory has three special subdirectories for tracking codebase evo
 
 2. **Update the changes index** at `docs/changes/README.md`
 
+3. **Add "Changes" sections** to all affected documentation files:
+   - Add a `## Changes` section at the end of each affected doc
+   - Use a table format linking to the change documentation:
+     ```markdown
+     ## Changes
+
+     | Change | Change Doc |
+     |--------|------------|
+     | Description of change | [change-name.md](../changes/change-name.md) |
+     ```
+   - Check all docs that reference the modified feature
+
+4. **MANDATORY: Run verification before committing**:
+   ```bash
+   # Find all docs referencing the modified feature
+   grep -rl "FeatureName" docs/
+
+   # Verify each found doc has a ## Changes section
+   grep -L "## Changes" <list of files>
+   ```
+
 ### When Adding Features
 
 1. **Create addition documentation** in `docs/additions/`:
@@ -187,6 +208,18 @@ The `docs/` directory has three special subdirectories for tracking codebase evo
    - Provide usage examples
 
 2. **Update the additions index** at `docs/additions/README.md`
+
+3. **Add "Additions" sections** to related documentation files:
+   - Add a `## Additions` section at the end of each related doc
+   - Use a table format linking to the addition documentation:
+     ```markdown
+     ## Additions
+
+     | Addition | Addition Doc |
+     |----------|--------------|
+     | Description of addition | [addition-name.md](../additions/addition-name.md) |
+     ```
+   - Link from existing docs that relate to the new feature
 
 ### Documentation Verification Checklist
 

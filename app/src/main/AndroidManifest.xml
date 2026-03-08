@@ -23,7 +23,7 @@
         android:required="false" />
 
     <application
-        android:name=".Droidify"
+        android:name=".AtdStore"
         android:allowBackup="true"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
@@ -34,7 +34,7 @@
         tools:ignore="UnusedAttribute">
 
         <receiver
-            android:name=".Droidify$BootReceiver"
+            android:name=".AtdStore$BootReceiver"
             android:exported="true">
 
             <intent-filter>
@@ -78,7 +78,7 @@
             android:name=".receivers.CopyErrorReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.looker.droidify.intent.action.COPY_ERROR" />
+                <action android:name="com.atd.store.intent.action.COPY_ERROR" />
             </intent-filter>
         </receiver>
 

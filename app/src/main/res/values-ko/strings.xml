@@ -156,7 +156,6 @@
     <string name="socket_error_DESC">서버에서 새 패킷을 가져오지 못했습니다.</string>
     <string name="home_screen_swiping_DESC">홈 화면에서 스와이프하여 페이지 전환</string>
     <string name="repository_not_found">다음 저장소를 찾지 못했습니다.</string>
-    <string name="special_credits">스페셜 크레딧</string>
     <string name="shizuku_not_installed">Shizuku가 설치되어 있지 않음</string>
     <string name="has_tethered_network">특정 네트워크 서비스에 바인딩됨</string>
     <string name="cannot_open_link">링크를 열 수 없습니다</string>

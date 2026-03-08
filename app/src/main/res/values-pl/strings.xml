@@ -154,7 +154,6 @@
     <string name="has_non_free_components">Posiada niewolne komponenty</string>
     <string name="shizuku_not_alive">Shizuku/Sui nie działa</string>
     <string name="shizuku_not_installed">Shizuku/Sui nie jest zainstalowane</string>
-    <string name="special_credits">Specjalne podziękowania</string>
     <string name="contains_nsfw">Zawiera treści nieodpowiednie do pracy (NSFW)</string>
     <string name="socket_error_DESC">Serwer nie mógł dostarczyć nowego pakietu</string>
     <string name="connection_error_DESC">Nie udało się połączyć z serwerem</string>

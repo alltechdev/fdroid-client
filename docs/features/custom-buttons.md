@@ -373,4 +373,5 @@ fun AppDetailScreen(
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `Custom Buttons` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |

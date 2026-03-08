@@ -157,7 +157,6 @@
     <string name="shizuku_not_alive">Shizuku/Sui není spuštěno</string>
     <string name="shizuku_not_installed">Shizuku/Sui není nainstalováno</string>
     <string name="contains_nsfw">Obsahuje obsah nevhodný do práce (NSFW)</string>
-    <string name="special_credits">Zvláštní poděkování</string>
     <string name="home_screen_swiping">Posouvání stránek</string>
     <string name="home_screen_swiping_DESC">Posuňte vlevo nebo v pravo pro změnu stránky</string>
     <string name="repository_not_found">Repozitář nebyl nalezen</string>

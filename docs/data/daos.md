@@ -265,6 +265,7 @@ suspend fun insertIndex(...)  // Multiple operations atomic
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | Favourite app DAO methods | [favourites.md](../removal/favourites.md) |
 | `antiFeaturesToInclude`/`antiFeaturesToExclude` parameters | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
 | Anti-feature insertion methods in `IndexDao` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |

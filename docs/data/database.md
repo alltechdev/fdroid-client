@@ -6,14 +6,14 @@ Droid-ify uses [Room](https://developer.android.com/training/data-storage/room) 
 
 | Property | Value |
 |----------|-------|
-| Database name | `droidify_room` |
+| Database name | `atd_room` |
 | Current version | 1 |
 | Migration strategy | Destructive (fallback) |
 | Journal mode | WAL |
 
 ## Database Class
 
-Located at `data/local/DroidifyDatabase.kt`:
+Located at `data/local/AtdDatabase.kt`:
 
 ```kotlin
 @Database(
@@ -22,7 +22,7 @@ Located at `data/local/DroidifyDatabase.kt`:
     entities = [/* all entities */],
 )
 @TypeConverters(PermissionConverter::class, Converters::class)
-abstract class DroidifyDatabase : RoomDatabase() {
+abstract class AtdDatabase : RoomDatabase() {
     abstract fun appDao(): AppDao
     abstract fun repoDao(): RepoDao
     abstract fun authDao(): AuthDao
@@ -223,7 +223,7 @@ data class MyEntity(
 
 ### Step 2: Add to Database
 
-In `DroidifyDatabase.kt`, add to entities list:
+In `AtdDatabase.kt`, add to entities list:
 
 ```kotlin
 @Database(
@@ -252,7 +252,7 @@ interface MyDao {
 ### Step 4: Add to Database Class
 
 ```kotlin
-abstract class DroidifyDatabase : RoomDatabase() {
+abstract class AtdDatabase : RoomDatabase() {
     // ... existing DAOs
     abstract fun myDao(): MyDao
 }
@@ -265,7 +265,7 @@ In `di/DatabaseModule.kt`:
 ```kotlin
 @Singleton
 @Provides
-fun provideMyDao(db: DroidifyDatabase): MyDao = db.myDao()
+fun provideMyDao(db: AtdDatabase): MyDao = db.myDao()
 ```
 
 ### Step 6: Bump Version
@@ -312,5 +312,14 @@ There is also a legacy SQLite database (`database/Database.kt`) that is being mi
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | Favourite apps table/queries | [favourites.md](../removal/favourites.md) |
 | `AntiFeatureEntity`, `AntiFeatureAppRelation`, `AntiFeatureRepoRelation` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |
+| Database name `atd_store` → `atd_room` | [database-rename.md](../changes/database-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |

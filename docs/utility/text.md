@@ -4,7 +4,7 @@ String manipulation, logging, and date generation utilities.
 
 ## Overview
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/common/Text.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/common/Text.kt`
 
 ## String Utilities
 
@@ -91,7 +91,7 @@ Used for downloading monthly statistics files.
 
 ## HTML Formatting
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/text/HtmlFormatter.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/text/HtmlFormatter.kt`
 
 ### Format HTML to SpannableStringBuilder
 
@@ -183,13 +183,13 @@ val formatted = html.format { url -> handleLink(url) }
 
 ## Annotated String (Compose)
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/text/AnnotatedString.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/text/AnnotatedString.kt`
 
 For Compose-based HTML rendering. See [Compose Screens](../ui/compose-screens.md) for details.
 
 ## Constants
 
-**File:** `app/src/main/kotlin/com/looker/droidify/utility/common/Constants.kt`
+**File:** `app/src/main/kotlin/com/atd/store/utility/common/Constants.kt`
 
 ```kotlin
 object Constants {

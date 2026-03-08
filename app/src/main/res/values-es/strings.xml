@@ -156,7 +156,6 @@
     <string name="shizuku_not_alive">Shizuku/Sui no se está ejecutando</string>
     <string name="contains_nsfw">Contiene contenido no apto para el trabajo (NSFW)</string>
     <string name="shizuku_not_installed">Shizuku/Sui no está instalado</string>
-    <string name="special_credits">Gracias a</string>
     <string name="home_screen_swiping">Deslizamiento de página</string>
     <string name="home_screen_swiping_DESC">Deslizar a la izquierda o a la derecha para cambiar de página</string>
     <string name="repository_not_found">El repositorio no ha sido encontrado</string>

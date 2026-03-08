@@ -114,4 +114,5 @@ fun provideSettingsExporter(
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `SettingsExporter` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

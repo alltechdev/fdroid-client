@@ -296,7 +296,7 @@ fun MyScreen(
 @Preview
 @Composable
 private fun MyScreenPreview() {
-    DroidifyTheme {
+    AtdTheme {
         MyScreen(
             state = MyState.Preview,
             onAction = {},
@@ -311,7 +311,15 @@ The following screens/features have been removed:
 
 | Feature | Removal Doc |
 |---------|-------------|
+| Package: `com.looker.droidify` | [package-rename.md](../changes/package-rename.md) |
 | `RepoListScreen` | [repository-management.md](../removal/repository-management.md) |
 | `RepoDetailScreen` | [repository-management.md](../removal/repository-management.md) |
 | `RepoEditScreen` | [repository-management.md](../removal/repository-management.md) |
 | Sort button in `AppListTopBar` | [sort-order-ui.md](../removal/sort-order-ui.md) |
+
+## Changes
+
+| Change | Change Doc |
+|--------|------------|
+| Class renames (AtdStore, AtdDatabase, AtdTheme) | [package-rename.md](../changes/package-rename.md) |
+| App branding Droid-ify → ATD Store | [app-branding.md](../changes/app-branding.md) |
