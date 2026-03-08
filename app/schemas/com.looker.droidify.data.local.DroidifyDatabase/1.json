@@ -2,149 +2,8 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "28859066b021d0f5a014f372e31c0e9a",
+    "identityHash": "95ad1f5cacc53cac8cc21812bef12e10",
     "entities": [
-      {
-        "tableName": "anti_feature",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`icon` TEXT, `name` TEXT NOT NULL, `description` TEXT, `locale` TEXT NOT NULL, `tag` TEXT NOT NULL, PRIMARY KEY(`tag`, `locale`))",
-        "fields": [
-          {
-            "fieldPath": "icon",
-            "columnName": "icon",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "description",
-            "columnName": "description",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "locale",
-            "columnName": "locale",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "tag",
-            "columnName": "tag",
-            "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": false,
-          "columnNames": [
-            "tag",
-            "locale"
-          ]
-        }
-      },
-      {
-        "tableName": "anti_features_app_relation",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tag` TEXT NOT NULL, `reason` TEXT NOT NULL, `appId` INTEGER NOT NULL, `versionCode` INTEGER NOT NULL, PRIMARY KEY(`tag`, `appId`, `versionCode`), FOREIGN KEY(`appId`) REFERENCES `app`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
-        "fields": [
-          {
-            "fieldPath": "tag",
-            "columnName": "tag",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "reason",
-            "columnName": "reason",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "appId",
-            "columnName": "appId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "versionCode",
-            "columnName": "versionCode",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": false,
-          "columnNames": [
-            "tag",
-            "appId",
-            "versionCode"
-          ]
-        },
-        "indices": [
-          {
-            "name": "index_anti_features_app_relation_appId",
-            "unique": false,
-            "columnNames": [
-              "appId"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_anti_features_app_relation_appId` ON `${TABLE_NAME}` (`appId`)"
-          }
-        ],
-        "foreignKeys": [
-          {
-            "table": "app",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "appId"
-            ],
-            "referencedColumns": [
-              "id"
-            ]
-          }
-        ]
-      },
-      {
-        "tableName": "anti_feature_repo_relation",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `tag` TEXT NOT NULL, PRIMARY KEY(`id`, `tag`), FOREIGN KEY(`id`) REFERENCES `repository`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
-        "fields": [
-          {
-            "fieldPath": "repoId",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "tag",
-            "columnName": "tag",
-            "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": false,
-          "columnNames": [
-            "id",
-            "tag"
-          ]
-        },
-        "foreignKeys": [
-          {
-            "table": "repository",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "id"
-            ],
-            "referencedColumns": [
-              "id"
-            ]
-          }
-        ]
-      },
       {
         "tableName": "authentication",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`password` TEXT NOT NULL, `username` TEXT NOT NULL, `initializationVector` BLOB NOT NULL, `repoId` INTEGER NOT NULL, PRIMARY KEY(`repoId`), FOREIGN KEY(`repoId`) REFERENCES `repository`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
@@ -1168,7 +1027,7 @@
       },
       {
         "tableName": "download_stats",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`packageName` TEXT NOT NULL, `source` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `fDroid` INTEGER NOT NULL, `fDroidClassic` INTEGER NOT NULL, `neoStore` INTEGER NOT NULL, `droidify` INTEGER NOT NULL, `flicky` INTEGER NOT NULL, `unknown` INTEGER NOT NULL, PRIMARY KEY(`packageName`, `source`, `timestamp`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`packageName` TEXT NOT NULL, `source` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `downloads` INTEGER NOT NULL, PRIMARY KEY(`packageName`, `source`, `timestamp`))",
         "fields": [
           {
             "fieldPath": "packageName",
@@ -1189,38 +1048,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "fDroid",
-            "columnName": "fDroid",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "fDroidClassic",
-            "columnName": "fDroidClassic",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "neoStore",
-            "columnName": "neoStore",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "droidify",
-            "columnName": "droidify",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "flicky",
-            "columnName": "flicky",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "unknown",
-            "columnName": "unknown",
+            "fieldPath": "downloads",
+            "columnName": "downloads",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -1251,73 +1080,6 @@
             ],
             "orders": [],
             "createSql": "CREATE INDEX IF NOT EXISTS `index_download_stats_timestamp` ON `${TABLE_NAME}` (`timestamp`)"
-          }
-        ]
-      },
-      {
-        "tableName": "DownloadStatsFile",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`fileName` TEXT NOT NULL, `lastModified` TEXT NOT NULL, `lastFetched` INTEGER NOT NULL, `fetchSuccess` INTEGER NOT NULL, `fileSize` INTEGER, `recordsCount` INTEGER, PRIMARY KEY(`fileName`))",
-        "fields": [
-          {
-            "fieldPath": "fileName",
-            "columnName": "fileName",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "lastModified",
-            "columnName": "lastModified",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "lastFetched",
-            "columnName": "lastFetched",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "fetchSuccess",
-            "columnName": "fetchSuccess",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "fileSize",
-            "columnName": "fileSize",
-            "affinity": "INTEGER"
-          },
-          {
-            "fieldPath": "recordsCount",
-            "columnName": "recordsCount",
-            "affinity": "INTEGER"
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": false,
-          "columnNames": [
-            "fileName"
-          ]
-        },
-        "indices": [
-          {
-            "name": "index_DownloadStatsFile_fileName",
-            "unique": true,
-            "columnNames": [
-              "fileName"
-            ],
-            "orders": [],
-            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_DownloadStatsFile_fileName` ON `${TABLE_NAME}` (`fileName`)"
-          },
-          {
-            "name": "index_DownloadStatsFile_fileName_lastModified",
-            "unique": false,
-            "columnNames": [
-              "fileName",
-              "lastModified"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_DownloadStatsFile_fileName_lastModified` ON `${TABLE_NAME}` (`fileName`, `lastModified`)"
           }
         ]
       },
@@ -1792,7 +1554,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '28859066b021d0f5a014f372e31c0e9a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '95ad1f5cacc53cac8cc21812bef12e10')"
     ]
   }
 }

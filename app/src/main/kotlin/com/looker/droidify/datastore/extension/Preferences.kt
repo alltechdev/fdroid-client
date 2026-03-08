@@ -1,11 +1,8 @@
 package com.looker.droidify.datastore.extension
 
-import android.content.Context
 import android.content.res.Configuration
-import com.looker.droidify.datastore.model.SortOrder
 import com.looker.droidify.datastore.model.Theme
 import com.looker.droidify.utility.common.SdkCheck
-import com.looker.droidify.R.string as stringRes
 import com.looker.droidify.R.style as styleRes
 
 fun Configuration.getThemeRes(theme: Theme, dynamicTheme: Boolean) = when (theme) {
@@ -57,12 +54,3 @@ fun Configuration.getThemeRes(theme: Theme, dynamicTheme: Boolean) = when (theme
         styleRes.Theme_Main_Amoled
     }
 }
-
-fun Context?.sortOrderName(sortOrder: SortOrder) = this?.let {
-    when (sortOrder) {
-        SortOrder.UPDATED -> getString(stringRes.recently_updated)
-        SortOrder.ADDED -> getString(stringRes.whats_new)
-        SortOrder.NAME -> getString(stringRes.name)
-        SortOrder.SIZE -> getString(stringRes.size)
-    }
-} ?: ""

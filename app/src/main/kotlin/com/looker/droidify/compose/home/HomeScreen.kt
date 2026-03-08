@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HomeScreen(
     onNavigateToApps: () -> Unit,
-    onNavigateToRepos: () -> Unit,
     onNavigateToSettings: () -> Unit,
 ) {
     Scaffold(
@@ -29,7 +28,7 @@ fun HomeScreen(
             TopAppBar(title = { Text("Droid-ify") })
         },
         bottomBar = {
-            androidx.compose.material3.Surface( tonalElevation = 3.dp ) {
+            androidx.compose.material3.Surface(tonalElevation = 3.dp) {
                 androidx.compose.foundation.layout.Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -37,7 +36,6 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
                     androidx.compose.material3.TextButton(onClick = onNavigateToApps) { Text("Apps") }
-                    androidx.compose.material3.TextButton(onClick = onNavigateToRepos) { Text("Repos") }
                     androidx.compose.material3.TextButton(onClick = onNavigateToSettings) { Text("Settings") }
                 }
             }
@@ -46,7 +44,6 @@ fun HomeScreen(
         HomeContent(
             paddingValues = padding,
             onNavigateToApps = onNavigateToApps,
-            onNavigateToRepos = onNavigateToRepos,
             onNavigateToSettings = onNavigateToSettings,
         )
     }
@@ -56,7 +53,6 @@ fun HomeScreen(
 private fun HomeContent(
     paddingValues: PaddingValues,
     onNavigateToApps: () -> Unit,
-    onNavigateToRepos: () -> Unit,
     onNavigateToSettings: () -> Unit,
 ) {
     Column(
@@ -73,9 +69,6 @@ private fun HomeContent(
         )
         Button(onClick = onNavigateToApps, modifier = Modifier.fillMaxWidth()) {
             Text("Browse Apps")
-        }
-        Button(onClick = onNavigateToRepos, modifier = Modifier.fillMaxWidth()) {
-            Text("Repositories")
         }
         Button(onClick = onNavigateToSettings, modifier = Modifier.fillMaxWidth()) {
             Text("Settings")

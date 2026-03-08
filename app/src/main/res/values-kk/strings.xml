@@ -8,7 +8,6 @@
     <string name="already_exists">Қазірдің өзінде бар</string>
     <string name="always">Әрқашан</string>
     <string name="amoled">Қара</string>
-    <string name="anti_features">Жағымсыз мүмкіндіктер</string>
     <string name="application">Қолданба</string>
     <string name="application_not_found">Қолданба табылмады</string>
     <string name="author_email">Автордың электрондық поштасы</string>
@@ -20,14 +19,9 @@
     <string name="cancel">Бас тарту</string>
     <string name="cannot_open_link">Сілтемені ашу мүмкін емес</string>
     <string name="cant_edit_sync_DESC">Синхрондау кезінде репозиторийді өңдеу мүмкін емес</string>
-    <plurals name="days">
-        <item quantity="one">күн</item>
-        <item quantity="other">күн</item>
-    </plurals>
     <string name="delete">Жою</string>
     <string name="delete_repository_DESC">Репозиторийді жою керек пе?</string>
     <string name="description">Сипаттама</string>
-    <string name="details">Мәліметтер</string>
     <string name="donate">Қолдау көрсету</string>
     <string name="downloaded_FORMAT">%s жүктелді</string>
     <string name="downloading">Жүктелуде</string>

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInstaller
+import androidx.core.content.IntentCompat
 import com.looker.droidify.R
 import com.looker.droidify.data.model.toPackageName
 import com.looker.droidify.installer.InstallManager
@@ -30,7 +31,7 @@ class SessionInstallerReceiver : BroadcastReceiver() {
 
         if (status == PackageInstaller.STATUS_PENDING_USER_ACTION) {
             // prompts user to enable unknown source
-            val promptIntent: Intent? = intent.getParcelableExtra(Intent.EXTRA_INTENT)
+            val promptIntent: Intent? = IntentCompat.getParcelableExtra(intent, Intent.EXTRA_INTENT, Intent::class.java)
 
             promptIntent?.let {
                 it.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)

@@ -166,8 +166,7 @@ class SyncService : ConnectionService<SyncService.Binder>() {
         }
 
         suspend fun updateAllApps() {
-            val skipSignature = settingsRepository.getInitial().ignoreSignature
-            val updates = Database.ProductAdapter.getUpdates(skipSignature)
+            val updates = Database.ProductAdapter.getUpdates(false)
             updateAllAppsInternal(updates)
         }
 
@@ -469,7 +468,7 @@ class SyncService : ConnectionService<SyncService.Binder>() {
                     handleUpdates(
                         notifyUpdates = setting.notifyUpdate,
                         autoUpdate = setting.autoUpdate,
-                        skipSignature = setting.ignoreSignature,
+                        skipSignature = false,
                     )
                 }
             }
@@ -492,13 +491,10 @@ class SyncService : ConnectionService<SyncService.Binder>() {
         val initialState = State.Connecting(repository!!.name)
         publishForegroundState(true, initialState)
         lifecycleScope.launch {
-            val unstableUpdates =
-                settingsRepository.getInitial().unstableUpdate
             val downloadJob = downloadFile(
                 task = task,
                 repository = repository,
                 isIndexModified = isIndexModified,
-                unstableUpdates = unstableUpdates,
             )
             currentTask = CurrentTask(task, downloadJob, isIndexModified, initialState)
         }
@@ -508,14 +504,12 @@ class SyncService : ConnectionService<SyncService.Binder>() {
         task: Task,
         repository: Repository,
         isIndexModified: Boolean,
-        unstableUpdates: Boolean,
     ): CoroutinesJob = launch(Dispatchers.Default) {
         var isNewlyModified = isIndexModified
         try {
             val response = RepositoryUpdater.update(
                 this@SyncService,
                 repository,
-                unstableUpdates,
             ) { stage, progress, total ->
                 launch {
                     syncState.emit(

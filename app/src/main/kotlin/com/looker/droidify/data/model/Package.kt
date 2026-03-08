@@ -9,7 +9,6 @@ data class Package(
     val apk: ApkFile,
     val platforms: Platforms,
     val features: List<String>,
-    val antiFeatures: List<String>,
     val manifest: Manifest,
     val whatsNew: String
 )

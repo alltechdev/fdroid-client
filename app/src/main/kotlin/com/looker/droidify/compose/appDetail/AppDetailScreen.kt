@@ -24,11 +24,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.FilledTonalIconToggleButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -51,14 +48,12 @@ import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import com.looker.droidify.R
-import com.looker.droidify.compose.appDetail.components.CustomButtonsRow
 import com.looker.droidify.compose.appDetail.components.PackageItem
 import com.looker.droidify.compose.components.BackButton
 import com.looker.droidify.data.model.App
 import com.looker.droidify.data.model.FilePath
 import com.looker.droidify.data.model.Package
 import com.looker.droidify.data.model.Repo
-import com.looker.droidify.datastore.model.CustomButton
 import com.looker.droidify.utility.text.toAnnotatedString
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,8 +63,6 @@ fun AppDetailScreen(
     viewModel: AppDetailViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val customButtons by viewModel.customButtons.collectAsStateWithLifecycle()
-    val uriHandler = LocalUriHandler.current
 
     Scaffold(
         topBar = {
@@ -111,13 +104,6 @@ fun AppDetailScreen(
                 AppDetail(
                     app = (state as AppDetailState.Success).app,
                     packages = (state as AppDetailState.Success).packages,
-                    customButtons = customButtons,
-                    onCustomButtonClick = { url ->
-                        try {
-                            uriHandler.openUri(url)
-                        } catch (_: Exception) {
-                        }
-                    },
                     modifier = Modifier.padding(padding),
                 )
             }
@@ -129,8 +115,6 @@ fun AppDetailScreen(
 private fun AppDetail(
     app: App,
     packages: List<Pair<Package, Repo>>,
-    customButtons: List<CustomButton>,
-    onCustomButtonClick: (url: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -142,21 +126,8 @@ private fun AppDetail(
         HeaderSection(
             app = app,
             packageName = app.metadata.packageName.name,
-            isInstalled = app.packages?.any { it.installed } == true,
-            isFavorite = true,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-
-        if (customButtons.isNotEmpty()) {
-            Spacer(modifier = Modifier.height(12.dp))
-            CustomButtonsRow(
-                buttons = customButtons,
-                packageName = app.metadata.packageName.name,
-                appName = app.metadata.name,
-                authorName = app.author?.name,
-                onButtonClick = onCustomButtonClick,
-            )
-        }
 
         val screenshots: List<FilePath> = remember(app.screenshots) {
             buildList {
@@ -241,13 +212,10 @@ private fun AppDetail(
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun HeaderSection(
     app: App?,
     packageName: String,
-    isInstalled: Boolean,
-    isFavorite: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -291,24 +259,6 @@ private fun HeaderSection(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-            )
-        }
-
-        FilledTonalIconToggleButton(
-            checked = isFavorite,
-            onCheckedChange = {},
-            modifier = Modifier.size(
-                IconButtonDefaults.mediumContainerSize(IconButtonDefaults.IconButtonWidthOption.Narrow)
-            )
-        ) {
-            val icon = if (isFavorite) {
-                R.drawable.ic_favourite_checked
-            } else {
-                R.drawable.ic_favourite
-            }
-            Icon(
-                painter = painterResource(icon),
-                contentDescription = null,
             )
         }
     }

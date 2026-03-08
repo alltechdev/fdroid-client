@@ -378,3 +378,13 @@ Settings are stored at:
 ```
 /data/data/com.looker.droidify/files/datastore/settings.preferences_pb
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `favouriteApps` | [favourites.md](../removal/favourites.md) |
+| `ProxyPreference` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `AutoSync` | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
+| `Settings export/import` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `sortOrderName()`, `supportedSortOrders()` | [sort-order-ui.md](../removal/sort-order-ui.md) |

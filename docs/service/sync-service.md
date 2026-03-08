@@ -253,3 +253,10 @@ withContext(NonCancellable) {
 - Binds to DownloadService for auto-updates
 - Handles `ACTION_CANCEL` to stop sync
 - Cleans up in `onDestroy()`
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `AutoSync` enum | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
+| Auto-sync scheduling options | [auto-sync-setting.md](../removal/auto-sync-setting.md) |

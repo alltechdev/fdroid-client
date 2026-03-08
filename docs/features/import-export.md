@@ -344,3 +344,10 @@ override suspend fun import(target: Uri): Settings = withContext(ioDispatcher) {
 4. **Validate on import** - Ensure data integrity before committing
 5. **Use SAF** - Always use Storage Access Framework for file access
 6. **Error feedback** - Provide clear messages on import/export failures
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `Settings Import/Export` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `Custom Buttons Import/Export` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |

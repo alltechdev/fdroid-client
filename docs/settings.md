@@ -277,13 +277,20 @@ if (settings.installerType == InstallerType.LEGACY) {
 Settings are grouped into sections using `SettingHeader`. Current sections:
 
 1. **Personalization** - Language, theme, dynamic colors, home screen behavior
-2. **Updates** - Auto-update, notifications, unstable/incompatible versions
-3. **Sync Repositories** - Auto-sync mode, cleanup interval
-4. **Install Types** - Installer selection, APK deletion
-5. **Proxy** - Proxy type, host, port
-6. **Import/Export** - Settings and repository backup
-7. **Custom Buttons** - User-defined action buttons
-8. **Credits** - About and attribution
+2. **Updates** - Auto-update, notifications
+3. **Install Types** - Installer selection
+4. **Credits** - About and attribution
+
+### Removed Sections
+
+| Section | Reason |
+|---------|--------|
+| Proxy | Feature removed |
+| Import/Export | Feature removed |
+| Custom Buttons | Feature removed |
+| Cleanup interval | Hardcoded to 6 hours |
+| Delete APK on install | Hardcoded to always delete |
+| Sync Repositories | Sync always enabled automatically |
 
 ## Reacting to Setting Changes
 
@@ -296,6 +303,18 @@ settingsRepository.get { myNewSetting }.collect { value ->
 }
 ```
 
-## Import/Export
+## Import/Export (REMOVED)
 
-Settings are automatically serialized to JSON via kotlinx.serialization. The `Settings` data class is annotated with `@Serializable`, and all fields are included in export/import operations through `PreferenceSettingsRepository.export()` and `import()` methods.
+> **Removed:** Settings import/export functionality has been removed.
+
+Previously, settings were automatically serialized to JSON via kotlinx.serialization through `PreferenceSettingsRepository.export()` and `import()` methods.
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Proxy settings | [proxy-and-backup.md](removal/proxy-and-backup.md) |
+| Import/Export | [custom-buttons-and-settings.md](removal/custom-buttons-and-settings.md) |
+| Custom buttons | [custom-buttons-and-settings.md](removal/custom-buttons-and-settings.md) |
+| Auto-sync setting | [auto-sync-setting.md](removal/auto-sync-setting.md) |
+| Favourites | [favourites.md](removal/favourites.md) |

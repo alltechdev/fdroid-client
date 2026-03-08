@@ -2,11 +2,8 @@ package com.looker.droidify.datastore
 
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import app.cash.turbine.test
-import com.looker.droidify.datastore.model.AutoSync
 import com.looker.droidify.datastore.model.SortOrder
 import com.looker.droidify.datastore.model.Theme
-import com.looker.droidify.utility.common.Exporter
-import io.mockk.mockk
 import java.io.File
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
@@ -35,16 +32,14 @@ class PreferenceSettingsRepositoryTest {
     private val testScope = TestScope(testDispatcher)
 
     private lateinit var repository: PreferenceSettingsRepository
-    private lateinit var exporter: Exporter<Settings>
 
     @Before
     fun setup() {
-        exporter = mockk(relaxed = true)
         val dataStore = PreferenceDataStoreFactory.create(
             scope = testScope,
             produceFile = { File(tmpFolder.newFolder(), "test_settings.preferences_pb") }
         )
-        repository = PreferenceSettingsRepository(dataStore, exporter)
+        repository = PreferenceSettingsRepository(dataStore)
     }
 
     @Test
@@ -52,7 +47,6 @@ class PreferenceSettingsRepositoryTest {
         val settings = repository.getInitial()
         assertEquals("system", settings.language)
         assertEquals(Theme.SYSTEM, settings.theme)
-        assertEquals(AutoSync.WIFI_ONLY, settings.autoSync)
         assertEquals(SortOrder.UPDATED, settings.sortOrder)
         assertFalse(settings.dynamicTheme)
     }
@@ -69,17 +63,6 @@ class PreferenceSettingsRepositoryTest {
         repository.setLanguage("de")
         val settings = repository.getInitial()
         assertEquals("de", settings.language)
-    }
-
-    @Test
-    fun `toggleFavourites adds and removes package`() = runTest {
-        repository.toggleFavourites("com.example.app")
-        var settings = repository.getInitial()
-        assertTrue(settings.favouriteApps.contains("com.example.app"))
-
-        repository.toggleFavourites("com.example.app")
-        settings = repository.getInitial()
-        assertFalse(settings.favouriteApps.contains("com.example.app"))
     }
 
     @Test
@@ -108,13 +91,6 @@ class PreferenceSettingsRepositoryTest {
     }
 
     @Test
-    fun `setAutoSync updates auto sync setting`() = runTest {
-        repository.setAutoSync(AutoSync.NEVER)
-        val settings = repository.getInitial()
-        assertEquals(AutoSync.NEVER, settings.autoSync)
-    }
-
-    @Test
     fun `setSortOrder updates sort order`() = runTest {
         repository.setSortOrder(SortOrder.NAME)
         val settings = repository.getInitial()
@@ -126,12 +102,5 @@ class PreferenceSettingsRepositoryTest {
         repository.setHomeScreenSwiping(false)
         val settings = repository.getInitial()
         assertFalse(settings.homeScreenSwiping)
-    }
-
-    @Test
-    fun `setDeleteApkOnInstall updates setting`() = runTest {
-        repository.setDeleteApkOnInstall(true)
-        val settings = repository.getInitial()
-        assertTrue(settings.deleteApkOnInstall)
     }
 }

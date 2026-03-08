@@ -270,3 +270,9 @@ settingsRepository.data
 2. **Handle missing apps** - A favorited app might be removed from repositories; filter nulls
 3. **Performance** - The favorites set is small, so filtering is cheap
 4. **UI feedback** - Provide clear visual indication of favorite status
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `Favourites` | [favourites.md](../removal/favourites.md) |

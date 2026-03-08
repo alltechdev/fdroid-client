@@ -1,6 +1,8 @@
-# Custom Buttons
+# Custom Buttons (REMOVED)
 
-Custom buttons allow users to add quick-action links on app detail pages, enabling one-tap access to privacy reports, alternative stores, or any custom URL.
+> **Removed:** This feature has been removed from the app. The documentation below is kept for historical reference.
+
+Custom buttons allowed users to add quick-action links on app detail pages, enabling one-tap access to privacy reports, alternative stores, or any custom URL.
 
 ## Overview
 
@@ -366,3 +368,9 @@ fun AppDetailScreen(
     )
 }
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `Custom Buttons` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |

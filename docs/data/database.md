@@ -7,7 +7,7 @@ Droid-ify uses [Room](https://developer.android.com/training/data-storage/room) 
 | Property | Value |
 |----------|-------|
 | Database name | `droidify_room` |
-| Current version | 2 |
+| Current version | 1 |
 | Migration strategy | Destructive (fallback) |
 | Journal mode | WAL |
 
@@ -17,7 +17,7 @@ Located at `data/local/DroidifyDatabase.kt`:
 
 ```kotlin
 @Database(
-    version = 2,
+    version = 1,
     exportSchema = true,
     entities = [/* all entities */],
 )
@@ -307,3 +307,10 @@ The database is configured for performance:
 ## Legacy Database
 
 There is also a legacy SQLite database (`database/Database.kt`) that is being migrated to Room. New features should use the Room database exclusively.
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Favourite apps table/queries | [favourites.md](../removal/favourites.md) |
+| `AntiFeatureEntity`, `AntiFeatureAppRelation`, `AntiFeatureRepoRelation` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |

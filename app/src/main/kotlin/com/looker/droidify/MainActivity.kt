@@ -4,13 +4,14 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.core.os.BundleCompat
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
@@ -21,15 +22,8 @@ import com.looker.droidify.datastore.get
 import com.looker.droidify.installer.InstallManager
 import com.looker.droidify.installer.model.installFrom
 import com.looker.droidify.ui.appDetail.AppDetailFragment
-import com.looker.droidify.ui.favourites.FavouritesFragment
-import com.looker.droidify.ui.repository.EditRepositoryFragment
-import com.looker.droidify.ui.repository.RepositoriesFragment
-import com.looker.droidify.ui.repository.RepositoryFragment
 import com.looker.droidify.ui.settings.SettingsFragment
 import com.looker.droidify.ui.tabsFragment.TabsFragment
-import com.looker.droidify.utility.common.DeeplinkType
-import com.looker.droidify.utility.common.SdkCheck
-import com.looker.droidify.utility.common.deeplinkType
 import com.looker.droidify.utility.common.extension.homeAsUp
 import com.looker.droidify.utility.common.extension.inputManager
 import com.looker.droidify.utility.common.getInstallPackageName
@@ -140,19 +134,17 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.findFragmentByTag(CursorOwner::class.java.name) as CursorOwner
         }
 
-        savedInstanceState?.getParcelableArrayList<FragmentStackItem>(STATE_FRAGMENT_STACK)
-            ?.let { fragmentStack += it }
+        savedInstanceState?.let { bundle ->
+            BundleCompat.getParcelableArrayList(bundle, STATE_FRAGMENT_STACK, FragmentStackItem::class.java)
+                ?.let { fragmentStack += it }
+        }
         if (savedInstanceState == null) {
             replaceFragment(TabsFragment(), null)
             if ((intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0) {
                 handleIntent(intent)
             }
         }
-        if (SdkCheck.isR) {
-            window.statusBarColor = resources.getColor(android.R.color.transparent, theme)
-            window.navigationBarColor = resources.getColor(android.R.color.transparent, theme)
-            WindowCompat.setDecorFitsSystemWindows(window, false)
-        }
+        enableEdgeToEdge()
         backHandler()
     }
 
@@ -216,7 +208,7 @@ class MainActivity : AppCompatActivity() {
     private fun popFragment(): Boolean {
         return fragmentStack.isNotEmpty() && run {
             val stackItem = fragmentStack.removeAt(fragmentStack.size - 1)
-            val fragment = Class.forName(stackItem.className).newInstance() as Fragment
+            val fragment = Class.forName(stackItem.className).getDeclaredConstructor().newInstance() as Fragment
             stackItem.arguments?.let(fragment::setArguments)
             stackItem.savedState?.let(fragment::setInitialSavedState)
             replaceFragment(fragment, false)
@@ -260,27 +252,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            Intent.ACTION_VIEW -> {
-                when (val deeplink = intent.deeplinkType()) {
-                    is DeeplinkType.AppDetail -> {
-                        val fragment = currentFragment
-                        if (fragment !is AppDetailFragment) {
-                            navigateProduct(deeplink.packageName, deeplink.repoAddress)
-                        }
-                    }
-
-                    is DeeplinkType.AppSearch -> {
-                        doSearchInTabsFragment(deeplink.query)
-                    }
-
-                    is DeeplinkType.AddRepository -> {
-                        navigateAddRepository(repoAddress = deeplink.address)
-                    }
-
-                    null -> {}
-                }
-            }
-
             Intent.ACTION_SHOW_APP_INFO -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     val packageName = intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME)
@@ -307,18 +278,8 @@ class MainActivity : AppCompatActivity() {
         tabsFragment.activateSearch(query)
     }
 
-    fun navigateFavourites() = pushFragment(FavouritesFragment())
     fun navigateProduct(packageName: String, repoAddress: String? = null) =
         pushFragment(AppDetailFragment(packageName, repoAddress))
 
-    fun navigateRepositories() = pushFragment(RepositoriesFragment())
     fun navigatePreferences() = pushFragment(SettingsFragment.newInstance())
-    fun navigateAddRepository(repoAddress: String? = null) =
-        pushFragment(EditRepositoryFragment(null, repoAddress))
-
-    fun navigateRepository(repositoryId: Long) =
-        pushFragment(RepositoryFragment(repositoryId))
-
-    fun navigateEditRepository(repositoryId: Long) =
-        pushFragment(EditRepositoryFragment(repositoryId, null))
 }

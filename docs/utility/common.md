@@ -201,12 +201,6 @@ Cache management utilities.
 
 Deep link parsing and handling.
 
-### Exporter
-
-**File:** `utility/common/Exporter.kt`
-
-Generic export functionality.
-
 ### Notification
 
 **File:** `utility/common/Notification.kt`
@@ -230,3 +224,9 @@ RecyclerView smooth scrolling utilities.
 **File:** `utility/common/Text.kt`
 
 Text formatting utilities.
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `Exporter` interface | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

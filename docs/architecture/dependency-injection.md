@@ -283,3 +283,11 @@ object FakeNetworkModule {
     fun provideDownloader(): Downloader = FakeDownloader()
 }
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `ProxyPreference` injection | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `SettingsExporter` injection | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `CustomButtonRepository` injection | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |

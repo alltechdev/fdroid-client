@@ -109,3 +109,9 @@ fun provideSettingsExporter(
     }
 )
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `SettingsExporter` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

@@ -48,8 +48,6 @@ suspend fun apps(
     repoId: Int? = null,
     categoriesToInclude: List<DefaultName>? = null,
     categoriesToExclude: List<DefaultName>? = null,
-    antiFeaturesToInclude: List<Tag>? = null,
-    antiFeaturesToExclude: List<Tag>? = null,
 ): List<AppMinimal>
 ```
 
@@ -399,3 +397,10 @@ Convert database entities to domain models in the repository:
 fun getApps(): Flow<List<App>> = appDao.streamAll()
     .map { entities -> entities.map { it.toDomain() } }
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Sort order UI selector (sort order still used internally) | [sort-order-ui.md](../removal/sort-order-ui.md) |
+| `antiFeaturesToInclude`/`antiFeaturesToExclude` parameters | [versions-antifeatures.md](../removal/versions-antifeatures.md) |

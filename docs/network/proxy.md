@@ -234,3 +234,11 @@ try {
 - Proxy authentication support
 - Per-repository proxy settings
 - Proxy auto-detection
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `ProxyPreference` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `ProxyType` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| Proxy settings UI | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

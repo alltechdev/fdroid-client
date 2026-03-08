@@ -49,9 +49,7 @@ Main home screen with ViewPager2 tabs.
 class TabsFragment : ScreenFragment() {
 
     enum class BackAction {
-        ProductAll,
         CollapseSearchView,
-        HideSections,
         None,
     }
 
@@ -59,10 +57,6 @@ class TabsFragment : ScreenFragment() {
 
     // ViewPager with tabs: Explore, Installed, Updates
     private var viewPager: ViewPager2? = null
-
-    // Category/section selection
-    private var sectionsAdapter: SectionsAdapter? = null
-    private var showSections = false
 }
 ```
 
@@ -70,7 +64,6 @@ class TabsFragment : ScreenFragment() {
 - ViewPager2 with 3 tabs (Explore, Installed, Updates)
 - Search integration with FocusSearchView
 - Sort order menu
-- Category/section filtering
 - Sync service binding
 
 ### State Preservation
@@ -79,7 +72,6 @@ class TabsFragment : ScreenFragment() {
 companion object {
     private const val STATE_SEARCH_FOCUSED = "searchFocused"
     private const val STATE_SEARCH_QUERY = "searchQuery"
-    private const val STATE_SHOW_SECTIONS = "showSections"
 }
 ```
 
@@ -87,7 +79,7 @@ companion object {
 
 **File:** `ui/appList/AppListFragment.kt`
 
-Displays list of apps with filtering.
+Displays list of apps.
 
 ```kotlin
 @AndroidEntryPoint
@@ -95,8 +87,13 @@ class AppListFragment : ScreenFragment() {
     private val viewModel: AppListViewModel by viewModels()
     private var adapter: AppListAdapter? = null
 
-    enum class Source {
-        AVAILABLE, INSTALLED, UPDATES
+    enum class Source(
+        val titleResId: Int,
+        val updateAll: Boolean,
+    ) {
+        AVAILABLE(R.string.available, false),
+        INSTALLED(R.string.installed, false),
+        UPDATES(R.string.updates, true),
     }
 }
 ```
@@ -151,55 +148,6 @@ class FavouritesFragment : ScreenFragment() {
 }
 ```
 
-## RepositoriesFragment
-
-**File:** `ui/repository/RepositoriesFragment.kt`
-
-Lists all configured repositories.
-
-```kotlin
-@AndroidEntryPoint
-class RepositoriesFragment : ScreenFragment() {
-    private var adapter: RepositoriesAdapter? = null
-}
-```
-
-## RepositoryFragment
-
-**File:** `ui/repository/RepositoryFragment.kt`
-
-Shows repository details.
-
-```kotlin
-@AndroidEntryPoint
-class RepositoryFragment : ScreenFragment() {
-    private val viewModel: RepositoryViewModel by viewModels()
-
-    companion object {
-        private const val EXTRA_REPOSITORY_ID = "repositoryId"
-    }
-}
-
-fun RepositoryFragment(repositoryId: Long)
-```
-
-## EditRepositoryFragment
-
-**File:** `ui/repository/EditRepositoryFragment.kt`
-
-Add or edit repository.
-
-```kotlin
-class EditRepositoryFragment : ScreenFragment() {
-    companion object {
-        private const val EXTRA_REPOSITORY_ID = "repositoryId"
-        private const val EXTRA_REPO_ADDRESS = "repoAddress"
-    }
-}
-
-fun EditRepositoryFragment(repositoryId: Long?, repoAddress: String?)
-```
-
 ## SettingsFragment
 
 **File:** `ui/settings/SettingsFragment.kt`
@@ -235,8 +183,8 @@ All navigation goes through `MainActivity`:
 ```kotlin
 // In fragment
 mainActivity?.navigateProduct(packageName)
-mainActivity?.navigateRepositories()
 mainActivity?.navigatePreferences()
+mainActivity?.navigateFavourites()
 ```
 
 ## ViewModel Integration
@@ -272,3 +220,17 @@ class MyFragment : ScreenFragment() {
 │  TabsFragment, AppListFragment, AppDetailFragment, etc.     │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+## Removed
+
+| Fragment | Removal Doc |
+|----------|-------------|
+| `RepositoriesFragment` | [repository-management.md](../removal/repository-management.md) |
+| `RepositoryFragment` | [repository-management.md](../removal/repository-management.md) |
+| `EditRepositoryFragment` | [repository-management.md](../removal/repository-management.md) |
+| `RepositoriesAdapter` | [repository-management.md](../removal/repository-management.md) |
+| `RepositoryViewModel` | [repository-management.md](../removal/repository-management.md) |
+| Category/Section Filtering | [category-filtering.md](../removal/category-filtering.md) |
+| Sort order menu in `TabsFragment` | [sort-order-ui.md](../removal/sort-order-ui.md) |
+| `Action.DETAILS` in `AppDetailFragment` | [app-info-uninstall-actions.md](../removal/app-info-uninstall-actions.md) |
+| `Action.UNINSTALL` in `AppDetailFragment` | [app-info-uninstall-actions.md](../removal/app-info-uninstall-actions.md) |

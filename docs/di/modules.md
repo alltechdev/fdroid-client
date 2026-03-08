@@ -308,3 +308,11 @@ Note: Uses `ViewModelComponent` not `SingletonComponent` for ViewModel lifecycle
 │  InstallManager, Syncable                                   │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `ProxyPreference` provider | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `SettingsExporter` provider | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `CustomButtonRepository` provider | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |

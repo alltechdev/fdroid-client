@@ -31,8 +31,6 @@ suspend fun apps(
     repoId: Int? = null,
     categoriesToInclude: List<DefaultName>? = null,
     categoriesToExclude: List<DefaultName>? = null,
-    antiFeaturesToInclude: List<Tag>? = null,
-    antiFeaturesToExclude: List<Tag>? = null,
 ): List<AppMinimal>
 ```
 
@@ -44,8 +42,6 @@ suspend fun apps(
 | `repoId` | Filter to specific repository |
 | `categoriesToInclude` | Only apps with these categories |
 | `categoriesToExclude` | Exclude apps with these categories |
-| `antiFeaturesToInclude` | Only apps with these anti-features |
-| `antiFeaturesToExclude` | Exclude apps with these anti-features |
 
 ### Get Single App
 
@@ -263,3 +259,11 @@ object RepoModule {
     // Repositories auto-provided via @Inject constructor
 }
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `favouriteApps` field | [favourites.md](../removal/favourites.md) |
+| Favourite app queries | [favourites.md](../removal/favourites.md) |
+| `antiFeaturesToInclude`/`antiFeaturesToExclude` parameters | [versions-antifeatures.md](../removal/versions-antifeatures.md) |

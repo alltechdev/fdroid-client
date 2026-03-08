@@ -31,10 +31,9 @@ This document describes the Jetpack Compose UI layer in Droid-ify.
 | `HomeScreen` | `Home` | Landing page with navigation buttons |
 | `AppListScreen` | `AppList` | Browse and search apps |
 | `AppDetailScreen` | `AppDetail(packageName)` | App details, versions, install |
-| `RepoListScreen` | `RepoList` | List of repositories |
-| `RepoDetailScreen` | `RepoDetail(repoId)` | Repository details |
-| `RepoEditScreen` | `RepoEdit(repoId)` | Edit repository settings |
 | `SettingsScreen` | `Settings` | App settings |
+
+> **Note:** Repository management screens (RepoList, RepoDetail, RepoEdit) have been removed. See [removal docs](../removal/repository-management.md).
 
 ## Screen Structure
 
@@ -62,16 +61,13 @@ Displays a searchable, filterable list of apps.
 fun AppListScreen(
     viewModel: AppListViewModel,
     onAppClick: (String) -> Unit,
-    onNavigateToRepos: () -> Unit,
     onNavigateToSettings: () -> Unit,
 )
 ```
 
 **Features:**
-- Sticky header with category chips
-- Favorites filter
+- Sticky header with favorites and category filter chips
 - App list with icons, names, versions
-- Search bar
 - Sort options
 
 ### ViewModel
@@ -119,27 +115,6 @@ Shows app details, screenshots, versions, and install actions.
 - Version list with download buttons
 - Custom action buttons
 - Links (website, source, etc.)
-
-## RepoListScreen
-
-**Location:** `compose/repoList/RepoListScreen.kt`
-
-Lists all configured repositories with enable/disable toggles.
-
-### ViewModel
-
-```kotlin
-@HiltViewModel
-class RepoListViewModel @Inject constructor(
-    private val repoRepository: RepoRepository,
-) : ViewModel() {
-
-    val repos: StateFlow<List<Repo>>
-
-    fun toggleRepo(repo: Repo)
-    fun deleteRepo(repo: Repo)
-}
-```
 
 ## SettingsScreen
 
@@ -329,3 +304,14 @@ private fun MyScreenPreview() {
     }
 }
 ```
+
+## Removed
+
+The following screens/features have been removed:
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `RepoListScreen` | [repository-management.md](../removal/repository-management.md) |
+| `RepoDetailScreen` | [repository-management.md](../removal/repository-management.md) |
+| `RepoEditScreen` | [repository-management.md](../removal/repository-management.md) |
+| Sort button in `AppListTopBar` | [sort-order-ui.md](../removal/sort-order-ui.md) |

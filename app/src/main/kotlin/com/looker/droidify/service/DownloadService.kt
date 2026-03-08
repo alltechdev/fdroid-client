@@ -52,6 +52,7 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.yield
 import com.looker.droidify.R.string as stringRes
 
+@OptIn(kotlinx.coroutines.FlowPreview::class)
 @AndroidEntryPoint
 class DownloadService : ConnectionService<DownloadService.Binder>() {
     companion object {

@@ -7,9 +7,6 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import androidx.room.Upsert
-import com.looker.droidify.data.local.model.AntiFeatureAppRelation
-import com.looker.droidify.data.local.model.AntiFeatureEntity
-import com.looker.droidify.data.local.model.AntiFeatureRepoRelation
 import com.looker.droidify.data.local.model.AppEntity
 import com.looker.droidify.data.local.model.AuthorEntity
 import com.looker.droidify.data.local.model.CategoryAppRelation
@@ -29,7 +26,6 @@ import com.looker.droidify.data.local.model.MirrorEntity
 import com.looker.droidify.data.local.model.RepoEntity
 import com.looker.droidify.data.local.model.ScreenshotEntity
 import com.looker.droidify.data.local.model.VersionEntity
-import com.looker.droidify.data.local.model.antiFeatureEntity
 import com.looker.droidify.data.local.model.appEntity
 import com.looker.droidify.data.local.model.authorEntity
 import com.looker.droidify.data.local.model.categoryEntity
@@ -96,7 +92,6 @@ interface IndexDao {
         val appIdByPackage: Map<String, Int> = existingIdByPackage + insertedIds
 
         val allVersions = mutableListOf<VersionEntity>()
-        val allAntiFeatureAppRelations = mutableListOf<AntiFeatureAppRelation>()
         val allCategoryAppRelations = mutableListOf<CategoryAppRelation>()
 
         val allAppNames = mutableListOf<LocalizedAppNameEntity>()
@@ -113,9 +108,7 @@ interface IndexDao {
             val appId = appIdByPackage.getValue(packageName)
             val metadata = packages.metadata
 
-            val versionsMap = packages.versionEntities(appId)
-            allVersions += versionsMap.keys
-            allAntiFeatureAppRelations += versionsMap.values.flatten()
+            allVersions += packages.versionEntities(appId)
 
             allCategoryAppRelations += metadata.categories.map { CategoryAppRelation(appId, it) }
 
@@ -131,9 +124,6 @@ interface IndexDao {
         }
 
         if (allVersions.isNotEmpty()) insertVersions(allVersions)
-        if (allAntiFeatureAppRelations.isNotEmpty()) insertAntiFeatureAppRelation(
-            allAntiFeatureAppRelations
-        )
         if (allCategoryAppRelations.isNotEmpty()) insertCategoryAppRelation(allCategoryAppRelations)
 
         insertLocalizedAppData(
@@ -169,13 +159,7 @@ interface IndexDao {
     suspend fun insertMirror(mirrors: List<MirrorEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAntiFeatures(antiFeatures: List<AntiFeatureEntity>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategories(categories: List<CategoryEntity>)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAntiFeatureRepoRelation(crossRef: List<AntiFeatureRepoRelation>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCategoryRepoRelation(crossRef: List<CategoryRepoRelation>)
@@ -249,9 +233,6 @@ interface IndexDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCategoryAppRelation(crossRef: List<CategoryAppRelation>)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAntiFeatureAppRelation(crossRef: List<AntiFeatureAppRelation>)
-
     @Transaction
     suspend fun insertLocalizedRepoData(
         names: List<LocalizedRepoNameEntity>,
@@ -302,15 +283,6 @@ interface IndexDao {
 
     @Transaction
     suspend fun insertRepoScopeData(repoId: Int, index: IndexV2) {
-        val antiFeatures = index.repo.antiFeatures.flatMap { (tag, feature) ->
-            feature.antiFeatureEntity(tag)
-        }
-        val antiFeatureRepoRelations = antiFeatures.map { AntiFeatureRepoRelation(repoId, it.tag) }
-        if (antiFeatures.isNotEmpty()) insertAntiFeatures(antiFeatures)
-        if (antiFeatureRepoRelations.isNotEmpty()) insertAntiFeatureRepoRelation(
-            antiFeatureRepoRelations
-        )
-
         val categories = index.repo.categories.flatMap { (defaultName, category) ->
             category.categoryEntity(defaultName)
         }

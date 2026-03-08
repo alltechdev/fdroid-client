@@ -15,9 +15,6 @@ import com.looker.droidify.data.local.dao.IndexDao
 import com.looker.droidify.data.local.dao.InstalledDao
 import com.looker.droidify.data.local.dao.RBLogDao
 import com.looker.droidify.data.local.dao.RepoDao
-import com.looker.droidify.data.local.model.AntiFeatureAppRelation
-import com.looker.droidify.data.local.model.AntiFeatureEntity
-import com.looker.droidify.data.local.model.AntiFeatureRepoRelation
 import com.looker.droidify.data.local.model.AppEntity
 import com.looker.droidify.data.local.model.AuthenticationEntity
 import com.looker.droidify.data.local.model.AuthorEntity
@@ -43,12 +40,9 @@ import com.looker.droidify.data.local.model.ScreenshotEntity
 import com.looker.droidify.data.local.model.VersionEntity
 
 @Database(
-    version = 2,
+    version = 1,
     exportSchema = true,
     entities = [
-        AntiFeatureEntity::class,
-        AntiFeatureAppRelation::class,
-        AntiFeatureRepoRelation::class,
         AuthenticationEntity::class,
         AuthorEntity::class,
         AppEntity::class,

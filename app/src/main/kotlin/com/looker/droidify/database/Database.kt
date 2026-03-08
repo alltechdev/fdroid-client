@@ -429,7 +429,6 @@ object Database {
                     updates = true,
                     searchQuery = "",
                     skipSignatureCheck = skipSignatureCheck,
-                    section = ProductItem.Section.All,
                     order = SortOrder.NAME,
                     signal = null,
                 ).use {
@@ -508,7 +507,6 @@ object Database {
             updates: Boolean,
             skipSignatureCheck: Boolean = false,
             searchQuery: String,
-            section: ProductItem.Section,
             order: SortOrder,
             signal: CancellationSignal?,
         ): Cursor {
@@ -552,21 +550,8 @@ object Database {
             builder += """JOIN ${Schema.Installed.name} AS installed
         ON product.${Schema.Product.ROW_PACKAGE_NAME} = installed.${Schema.Installed.ROW_PACKAGE_NAME}"""
 
-            if (section is ProductItem.Section.Category) {
-                builder += """JOIN ${Schema.Category.name} AS category
-          ON product.${Schema.Product.ROW_PACKAGE_NAME} = category.${Schema.Product.ROW_PACKAGE_NAME}"""
-            }
-
             builder += """WHERE repository.${Schema.Repository.ROW_ENABLED} != 0 AND
         repository.${Schema.Repository.ROW_DELETED} == 0"""
-
-            if (section is ProductItem.Section.Category) {
-                builder += "AND category.${Schema.Category.ROW_NAME} = ?"
-                builder %= section.name
-            } else if (section is ProductItem.Section.Repository) {
-                builder += "AND product.${Schema.Product.ROW_REPOSITORY_ID} = ?"
-                builder %= section.id.toString()
-            }
 
             if (searchQuery.isNotEmpty()) {
                 builder += """AND ${Schema.Synthetic.ROW_MATCH_RANK} > 0"""

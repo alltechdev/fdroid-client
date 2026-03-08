@@ -23,13 +23,6 @@ data class Repo(
     }
 }
 
-data class AntiFeature(
-    val id: Long,
-    val name: String,
-    val icon: String = "",
-    val description: String = "",
-)
-
 data class Category(
     val id: Long,
     val name: String,

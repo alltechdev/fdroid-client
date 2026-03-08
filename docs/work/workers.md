@@ -227,3 +227,10 @@ class MyWorker @AssistedInject constructor(
 │  - InstallManager                                           │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `AutoSync` work constraints | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
+| `toWorkConstraints()` extension | [dead-code-cleanup.md](../removal/dead-code-cleanup.md) |

@@ -25,8 +25,6 @@ import coil3.request.crossfade
 import com.looker.droidify.content.ProductPreferences
 import com.looker.droidify.database.Database
 import com.looker.droidify.datastore.SettingsRepository
-import com.looker.droidify.datastore.get
-import com.looker.droidify.datastore.model.AutoSync
 import com.looker.droidify.index.RepositoryUpdater
 import com.looker.droidify.installer.InstallManager
 import com.looker.droidify.network.Downloader
@@ -45,14 +43,11 @@ import com.looker.droidify.work.CleanUpWorker
 import dagger.hilt.android.HiltAndroidApp
 import io.ktor.client.HttpClient
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.INFINITE
 import kotlin.time.Duration.Companion.hours
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.collectIndexed
-import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 
 @HiltAndroidApp
@@ -126,44 +121,15 @@ class Droidify : Application(), SingletonImageLoader.Factory, Configuration.Prov
     }
 
     private fun updatePreference() {
-        appScope.launch {
-            launch {
-                settingsRepository.get { unstableUpdate }.drop(1).collect {
-                    forceSyncAll()
-                }
-            }
-            launch {
-                settingsRepository.get { autoSync }.collectIndexed { index, syncMode ->
-                    // Don't update sync job on initial collect
-                    updateSyncJob(index > 0, syncMode)
-                }
-            }
-            launch {
-                settingsRepository.get { cleanUpInterval }.drop(1).collect {
-                    if (it == INFINITE) {
-                        CleanUpWorker.removeAllSchedules(applicationContext)
-                    } else {
-                        CleanUpWorker.scheduleCleanup(applicationContext, it)
-                    }
-                }
-            }
-        }
+        CleanUpWorker.scheduleCleanup(applicationContext, 6.hours)
+        scheduleSyncJob()
     }
 
-    private fun updateSyncJob(force: Boolean, autoSync: AutoSync) {
-        if (autoSync == AutoSync.NEVER) {
-            jobScheduler?.cancel(Constants.JOB_ID_SYNC)
-            return
-        }
-        val jobScheduler = jobScheduler
-        val syncConditions = when (autoSync) {
-            AutoSync.ALWAYS -> SyncPreference(NetworkType.CONNECTED)
-            AutoSync.WIFI_ONLY -> SyncPreference(NetworkType.UNMETERED)
-            AutoSync.WIFI_PLUGGED_IN -> SyncPreference(NetworkType.UNMETERED, pluggedIn = true)
-        }
-        val isCompleted = jobScheduler?.allPendingJobs
-            ?.any { it.id == Constants.JOB_ID_SYNC } == false
-        if (force || isCompleted) {
+    private fun scheduleSyncJob() {
+        val jobScheduler = jobScheduler ?: return
+        val isCompleted = jobScheduler.allPendingJobs.none { it.id == Constants.JOB_ID_SYNC }
+        if (isCompleted) {
+            val syncConditions = SyncPreference(NetworkType.CONNECTED)
             val period = 12.hours.inWholeMilliseconds
             val job = SyncService.Job.create(
                 context = this,
@@ -172,7 +138,7 @@ class Droidify : Application(), SingletonImageLoader.Factory, Configuration.Prov
                 isCharging = syncConditions.pluggedIn,
                 isBatteryLow = syncConditions.batteryNotLow,
             )
-            jobScheduler?.schedule(job)
+            jobScheduler.schedule(job)
         }
     }
 

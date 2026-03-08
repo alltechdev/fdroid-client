@@ -15,7 +15,7 @@ The legacy UI uses Android Fragments with ViewBinding and RecyclerView. It's acc
 │  ┌────────────────────────────────────────────────────┐ │
 │  │                  TabsFragment                       │ │
 │  │  ┌────────────┐ ┌────────────┐ ┌────────────────┐  │ │
-│  │  │  Explore   │ │  Installed │ │   Favourites   │  │ │
+│  │  │  Explore   │ │  Installed │ │    Updates     │  │ │
 │  │  │   (tab)    │ │    (tab)   │ │     (tab)      │  │ │
 │  │  └─────┬──────┘ └──────┬─────┘ └───────┬────────┘  │ │
 │  │        │               │               │           │ │
@@ -29,7 +29,6 @@ The legacy UI uses Android Fragments with ViewBinding and RecyclerView. It's acc
 │                          ▼                               │
 │  ┌────────────────────────────────────────────────────┐ │
 │  │               AppDetailFragment                     │ │
-│  │               RepositoryFragment                    │ │
 │  │               SettingsFragment                      │ │
 │  └────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────┘
@@ -43,9 +42,6 @@ The legacy UI uses Android Fragments with ViewBinding and RecyclerView. It's acc
 | `AppListFragment` | List of apps | `AppListScreen` |
 | `AppDetailFragment` | App details & install | `AppDetailScreen` |
 | `FavouritesFragment` | Favorite apps list | `AppListScreen` (filtered) |
-| `RepositoriesFragment` | List of repos | `RepoListScreen` |
-| `RepositoryFragment` | Single repo details | `RepoDetailScreen` |
-| `EditRepositoryFragment` | Add/edit repo | `RepoEditScreen` |
 | `SettingsFragment` | App settings | `SettingsScreen` |
 
 ## Key Files
@@ -59,9 +55,6 @@ The legacy UI uses Android Fragments with ViewBinding and RecyclerView. It's acc
 | `ui/appList/AppListFragment.kt` | App list display |
 | `ui/appDetail/AppDetailFragment.kt` | App details |
 | `ui/favourites/FavouritesFragment.kt` | Favorites list |
-| `ui/repository/RepositoriesFragment.kt` | Repo list |
-| `ui/repository/RepositoryFragment.kt` | Repo details |
-| `ui/repository/EditRepositoryFragment.kt` | Repo editor |
 | `ui/settings/SettingsFragment.kt` | Settings |
 
 ### Adapters
@@ -71,8 +64,6 @@ The legacy UI uses Android Fragments with ViewBinding and RecyclerView. It's acc
 | `ui/appList/AppListAdapter.kt` | RecyclerView adapter for apps |
 | `ui/appDetail/AppDetailAdapter.kt` | App detail sections |
 | `ui/appDetail/ScreenshotsAdapter.kt` | Screenshots carousel |
-| `ui/appDetail/CustomButtonsAdapter.kt` | Custom action buttons |
-| `ui/repository/RepositoriesAdapter.kt` | Repo list items |
 | `ui/favourites/FavouriteFragmentAdapter.kt` | Favorites list |
 
 ### ViewModels
@@ -83,7 +74,6 @@ The legacy UI uses Android Fragments with ViewBinding and RecyclerView. It's acc
 | `ui/appList/AppListViewModel.kt` | App list state |
 | `ui/appDetail/AppDetailViewModel.kt` | App detail state |
 | `ui/favourites/FavouritesViewModel.kt` | Favorites state |
-| `ui/repository/RepositoryViewModel.kt` | Repo state |
 
 ## Fragment Structure
 
@@ -198,12 +188,11 @@ parentFragmentManager.popBackStack()
 |---------|--------|---------|--------|
 | App List | `AppListFragment` | `AppListScreen` | Migrated |
 | App Detail | `AppDetailFragment` | `AppDetailScreen` | Migrated |
-| Repo List | `RepositoriesFragment` | `RepoListScreen` | Migrated |
-| Repo Detail | `RepositoryFragment` | `RepoDetailScreen` | Migrated |
-| Repo Edit | `EditRepositoryFragment` | `RepoEditScreen` | Migrated |
 | Settings | `SettingsFragment` | `SettingsScreen` | Migrated |
 | Favorites | `FavouritesFragment` | Integrated in AppList | Migrated |
 | Tabs | `TabsFragment` | - | Removed (single list) |
+| Repo Management | - | - | Removed |
+| Category Filtering | - | - | Removed |
 
 ## Migrating a Fragment to Compose
 
@@ -256,3 +245,11 @@ During migration, both UIs coexist:
 - `MainComposeActivity` - New Compose UI
 
 The app can be configured to launch either activity. Eventually, `MainActivity` and all legacy UI code will be removed.
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Repository Management Fragments | [repository-management.md](../removal/repository-management.md) |
+| Category/Section Filtering | [category-filtering.md](../removal/category-filtering.md) |
+| Sort order menu in `TabsFragment` | [sort-order-ui.md](../removal/sort-order-ui.md) |

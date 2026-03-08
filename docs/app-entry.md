@@ -68,14 +68,7 @@ private fun popFragment(): Boolean {
 fun navigateFavourites() = pushFragment(FavouritesFragment())
 fun navigateProduct(packageName: String, repoAddress: String? = null) =
     pushFragment(AppDetailFragment(packageName, repoAddress))
-fun navigateRepositories() = pushFragment(RepositoriesFragment())
 fun navigatePreferences() = pushFragment(SettingsFragment.newInstance())
-fun navigateAddRepository(repoAddress: String? = null) =
-    pushFragment(EditRepositoryFragment(null, repoAddress))
-fun navigateRepository(repositoryId: Long) =
-    pushFragment(RepositoryFragment(repositoryId))
-fun navigateEditRepository(repositoryId: Long) =
-    pushFragment(EditRepositoryFragment(repositoryId, null))
 ```
 
 ### Intent Handling
@@ -166,9 +159,6 @@ class MainComposeActivity : ComponentActivity() {
                     appListScreen(navController)
                     appDetailScreen(navController)
                     settingsScreen(navController)
-                    repoListScreen(navController)
-                    repoDetailScreen(navController)
-                    repoEditScreen(navController)
                 }
             }
         }
@@ -258,3 +248,12 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Repository navigation (`navigateAddRepository`) | [repository-management.md](removal/repository-management.md) |
+| `repoListScreen`, `repoDetailScreen`, `repoEditScreen` | [repository-management.md](removal/repository-management.md) |
+| `navigateFavourites()` | [favourites.md](removal/favourites.md) |
+| Deep link handling (`deeplinkType()`, `ACTION_VIEW`) | [deeplinks.md](removal/deeplinks.md) |

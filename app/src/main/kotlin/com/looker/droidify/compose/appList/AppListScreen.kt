@@ -34,8 +34,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -74,7 +72,6 @@ import com.looker.droidify.sync.v2.model.DefaultName
 fun AppListScreen(
     viewModel: AppListViewModel,
     onAppClick: (String) -> Unit,
-    onNavigateToRepos: () -> Unit,
     onNavigateToSettings: () -> Unit,
 ) {
     val apps by viewModel.appsState.collectAsStateWithLifecycle()
@@ -86,7 +83,6 @@ fun AppListScreen(
     Scaffold(
         topBar = {
             AppListTopBar(
-                onNavigateToRepos = onNavigateToRepos,
                 onNavigateToSettings = onNavigateToSettings,
                 title = {
                     Text("Droid-ify")
@@ -100,18 +96,6 @@ fun AppListScreen(
         ) {
             stickyHeader {
                 Column(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 8.dp)
-                    ) {
-                        val favSelected by viewModel.favouritesOnly.collectAsStateWithLifecycle()
-                        FilterChip(
-                            selected = favSelected,
-                            onClick = { viewModel.toggleFavouritesOnly() },
-                            label = { Text("Favourites") },
-                        )
-                    }
                     CategoriesList(availableCategories) { category ->
                         CategoryChip(
                             category = category,
@@ -211,7 +195,6 @@ fun CategoriesList(
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun AppListTopBar(
-    onNavigateToRepos: () -> Unit,
     onNavigateToSettings: () -> Unit,
     title: @Composable () -> Unit,
 ) {
@@ -224,20 +207,6 @@ private fun AppListTopBar(
                 modifier = Modifier.size(smallContainerSize(Narrow)),
             ) {
                 Icon(Icons.Filled.Sync, contentDescription = "Sync")
-            }
-            Spacer(Modifier.width(4.dp))
-            IconButton(
-                onClick = { expanded = true },
-                modifier = Modifier.size(smallContainerSize(Narrow)),
-            ) {
-                Icon(Icons.AutoMirrored.Filled.Sort, contentDescription = "Sort")
-            }
-            Spacer(Modifier.width(4.dp))
-            IconButton(
-                onClick = onNavigateToRepos,
-                modifier = Modifier.size(smallContainerSize(Narrow)),
-            ) {
-                Icon(Icons.AutoMirrored.Filled.List, contentDescription = "Repos")
             }
             Spacer(Modifier.width(4.dp))
         },

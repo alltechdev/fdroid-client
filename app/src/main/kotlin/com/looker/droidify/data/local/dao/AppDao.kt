@@ -1,12 +1,11 @@
 package com.looker.droidify.data.local.dao
 
 import androidx.room.Dao
-import androidx.room.MapInfo
+import androidx.room.MapColumn
 import androidx.room.Query
 import androidx.room.RawQuery
 import androidx.room.Transaction
 import androidx.sqlite.db.SimpleSQLiteQuery
-import com.looker.droidify.data.local.model.AntiFeatureAppRelation
 import com.looker.droidify.data.local.model.AppEntity
 import com.looker.droidify.data.local.model.AppEntityRelations
 import com.looker.droidify.data.local.model.CategoryAppRelation
@@ -17,7 +16,6 @@ import com.looker.droidify.data.model.FilePath
 import com.looker.droidify.data.model.PackageName
 import com.looker.droidify.datastore.model.SortOrder
 import com.looker.droidify.sync.v2.model.DefaultName
-import com.looker.droidify.sync.v2.model.Tag
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -28,7 +26,6 @@ interface AppDao {
             AppEntity::class,
             VersionEntity::class,
             CategoryAppRelation::class,
-            AntiFeatureAppRelation::class,
         ],
     )
     fun _rawStreamAppEntities(query: SimpleSQLiteQuery): Flow<List<AppEntity>>
@@ -42,8 +39,6 @@ interface AppDao {
         repoId: Int? = null,
         categoriesToInclude: List<DefaultName>? = null,
         categoriesToExclude: List<DefaultName>? = null,
-        antiFeaturesToInclude: List<Tag>? = null,
-        antiFeaturesToExclude: List<Tag>? = null,
         locale: String,
     ): List<AppMinimal> = _rawQueryAppMinimal(
         searchQueryMinimal(
@@ -52,8 +47,6 @@ interface AppDao {
             repoId = repoId,
             categoriesToInclude = categoriesToInclude,
             categoriesToExclude = categoriesToExclude,
-            antiFeaturesToInclude = antiFeaturesToInclude,
-            antiFeaturesToExclude = antiFeaturesToExclude,
             locale = locale,
         ),
     ).map {
@@ -86,8 +79,6 @@ interface AppDao {
         repoId: Int?,
         categoriesToInclude: List<DefaultName>?,
         categoriesToExclude: List<DefaultName>?,
-        antiFeaturesToInclude: List<Tag>?,
-        antiFeaturesToExclude: List<Tag>?,
         locale: String,
     ): SimpleSQLiteQuery {
         logQuery(
@@ -96,8 +87,6 @@ interface AppDao {
             "repoId" to repoId,
             "categoriesToInclude" to categoriesToInclude,
             "categoriesToExclude" to categoriesToExclude,
-            "antiFeaturesToInclude" to antiFeaturesToInclude,
-            "antiFeaturesToExclude" to antiFeaturesToExclude,
             "locale" to locale,
         )
         val args = arrayListOf<Any?>()
@@ -142,9 +131,6 @@ interface AppDao {
             if (categoriesToInclude != null || categoriesToExclude != null) {
                 append(" LEFT JOIN category_app_relation ON app.id = category_app_relation.id")
             }
-            if (antiFeaturesToExclude != null || antiFeaturesToInclude != null) {
-                append(" LEFT JOIN anti_features_app_relation ON app.id = anti_features_app_relation.appId")
-            }
 
             append(" WHERE 1")
 
@@ -165,20 +151,6 @@ interface AppDao {
                 append(categoriesToExclude.joinToString(", ") { "?" })
                 append(")")
                 args.addAll(categoriesToExclude)
-            }
-
-            if (antiFeaturesToInclude != null) {
-                append(" AND anti_features_app_relation.tag IN (")
-                append(antiFeaturesToInclude.joinToString(", ") { "?" })
-                append(")")
-                args.addAll(antiFeaturesToInclude)
-            }
-
-            if (antiFeaturesToExclude != null) {
-                append(" AND anti_features_app_relation.tag NOT IN (")
-                append(antiFeaturesToExclude.joinToString(", ") { "?" })
-                append(")")
-                args.addAll(antiFeaturesToExclude)
             }
 
             if (searchQuery != null) {
@@ -242,7 +214,6 @@ interface AppDao {
     suspend fun suggestedVersionName(appId: Int): String
 
     // Batch fetch suggested (max versionCode) versionName for multiple appIds
-    @MapInfo(keyColumn = "appId", valueColumn = "versionName")
     @Query(
         """
         SELECT v.appId AS appId, MAX(v.versionName) AS versionName
@@ -250,7 +221,7 @@ interface AppDao {
         GROUP BY appId
         """
     )
-    suspend fun suggestedVersionNamesAll(): Map<Int, String>
+    suspend fun suggestedVersionNamesAll(): Map<@MapColumn(columnName = "appId") Int, @MapColumn(columnName = "versionName") String>
 
     @Transaction
     @Query("SELECT * FROM app WHERE packageName = :packageName")

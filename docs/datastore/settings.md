@@ -15,26 +15,19 @@ User preferences and app settings management using Jetpack DataStore.
 @Serializable
 data class Settings(
     val language: String = "system",
-    val incompatibleVersions: Boolean = false,
     val notifyUpdate: Boolean = true,
-    val unstableUpdate: Boolean = false,
-    val ignoreSignature: Boolean = false,
     val theme: Theme = Theme.SYSTEM,
     val dynamicTheme: Boolean = false,
     val installerType: InstallerType = InstallerType.Default,
     val legacyInstallerComponent: LegacyInstallerComponent? = null,
     val autoUpdate: Boolean = false,
-    val autoSync: AutoSync = AutoSync.WIFI_ONLY,
     val sortOrder: SortOrder = SortOrder.UPDATED,
-    val proxy: ProxyPreference = ProxyPreference(),
-    val cleanUpInterval: Duration = 12.hours,
     val lastCleanup: Instant? = null,
     val lastRbLogFetch: Long? = null,
     val lastModifiedDownloadStats: Long? = null,
     val favouriteApps: Set<String> = emptySet(),
     val homeScreenSwiping: Boolean = true,
     val enabledRepoIds: Set<Int> = emptySet(),
-    val deleteApkOnInstall: Boolean = false,
 )
 ```
 
@@ -43,11 +36,23 @@ data class Settings(
 | Category | Settings |
 |----------|----------|
 | Display | `theme`, `dynamicTheme`, `language`, `homeScreenSwiping` |
-| Updates | `notifyUpdate`, `unstableUpdate`, `autoUpdate`, `incompatibleVersions` |
-| Installation | `installerType`, `legacyInstallerComponent`, `ignoreSignature`, `deleteApkOnInstall` |
-| Sync | `autoSync`, `sortOrder`, `enabledRepoIds` |
-| Network | `proxy` (type, host, port) |
-| Data | `favouriteApps`, `cleanUpInterval`, `lastCleanup` |
+| Updates | `notifyUpdate`, `autoUpdate` |
+| Installation | `installerType`, `legacyInstallerComponent` |
+| Sync | `sortOrder`, `enabledRepoIds` |
+| Data | `lastCleanup` |
+
+### Removed Settings
+
+| Setting | Reason | Hardcoded Value |
+|---------|--------|-----------------|
+| `proxy` | Feature removed | N/A (no proxy support) |
+| `cleanUpInterval` | Simplified | 6 hours |
+| `deleteApkOnInstall` | Simplified | Always true |
+| `unstableUpdate` | Simplified | Always false |
+| `incompatibleVersions` | Simplified | Always false |
+| `ignoreSignature` | Simplified | Always false |
+| `autoSync` | Simplified | Always syncs when network available |
+| `favouriteApps` | Feature removed | N/A |
 
 ## Repository Interface
 
@@ -56,18 +61,27 @@ interface SettingsRepository {
     val data: Flow<Settings>
 
     suspend fun getInitial(): Settings
-    suspend fun export(target: Uri)
-    suspend fun import(target: Uri)
 
     // Individual setters for each setting
     suspend fun setTheme(theme: Theme)
     suspend fun setInstallerType(installerType: InstallerType)
-    suspend fun setAutoSync(autoSync: AutoSync)
     suspend fun toggleFavourites(packageName: String)
     suspend fun setRepoEnabled(repoId: Int, enabled: Boolean)
     // ... more setters
 }
 ```
+
+### Removed Methods
+
+- `export(target: Uri)` - Backup/restore removed
+- `import(target: Uri)` - Backup/restore removed
+- `setCleanUpInterval(interval: Duration)` - Hardcoded to 6 hours
+- `setDeleteApkOnInstall(enable: Boolean)` - Hardcoded to true
+- `enableUnstableUpdates(enable: Boolean)` - Hardcoded to false
+- `enableIncompatibleVersion(enable: Boolean)` - Hardcoded to false
+- `setIgnoreSignature(enable: Boolean)` - Hardcoded to false
+- `setAutoSync(autoSync: AutoSync)` - Sync always enabled automatically
+- `toggleFavourites(packageName: String)` - Feature removed
 
 ### Convenience Extension
 
@@ -111,9 +125,12 @@ enum class Theme {
 }
 ```
 
-### AutoSync
+### AutoSync (REMOVED)
+
+> **Removed:** Auto-sync setting has been removed. Sync now always runs automatically when network is available.
 
 ```kotlin
+// Previously:
 enum class AutoSync {
     ALWAYS,         // Sync on any connection
     WIFI_ONLY,      // Only on WiFi
@@ -142,9 +159,12 @@ enum class InstallerType {
 }
 ```
 
-### ProxyPreference
+### ProxyPreference (REMOVED)
+
+> **Removed:** Proxy support has been removed from the app.
 
 ```kotlin
+// Previously:
 @Serializable
 data class ProxyPreference(
     val type: ProxyType = ProxyType.DIRECT,
@@ -219,3 +239,13 @@ Dynamic themes require Android 12+ (Snow Cake).
 │  - Call setters to update                                   │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `ProxyPreference` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `export()` / `import()` methods | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| `AutoSync` enum, `setAutoSync()` | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
+| `favouriteApps`, `toggleFavourites()` | [favourites.md](../removal/favourites.md) |
+| `sortOrderName()`, `supportedSortOrders()` | [sort-order-ui.md](../removal/sort-order-ui.md) |

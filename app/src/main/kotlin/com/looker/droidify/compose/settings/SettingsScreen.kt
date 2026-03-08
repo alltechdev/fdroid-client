@@ -3,8 +3,6 @@ package com.looker.droidify.compose.settings
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,43 +12,27 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.looker.droidify.BuildConfig
 import com.looker.droidify.R
 import com.looker.droidify.compose.components.BackButton
-import com.looker.droidify.compose.settings.SettingsViewModel.Companion.cleanUpIntervals
 import com.looker.droidify.compose.settings.SettingsViewModel.Companion.localeCodesList
 import com.looker.droidify.compose.settings.components.ActionSettingItem
-import com.looker.droidify.compose.settings.components.CustomButtonsSettingItem
 import com.looker.droidify.compose.settings.components.SelectionSettingItem
 import com.looker.droidify.compose.settings.components.SettingHeader
 import com.looker.droidify.compose.settings.components.SwitchSettingItem
-import com.looker.droidify.compose.settings.components.TextInputSettingItem
-import com.looker.droidify.compose.settings.components.WarningBanner
-import com.looker.droidify.datastore.model.AutoSync
 import com.looker.droidify.datastore.model.InstallerType
 import com.looker.droidify.datastore.model.LegacyInstallerComponent
-import com.looker.droidify.datastore.model.ProxyType
 import com.looker.droidify.datastore.model.Theme
 import com.looker.droidify.utility.common.SdkCheck
-import com.looker.droidify.utility.common.isIgnoreBatteryEnabled
-import com.looker.droidify.utility.common.requestBatteryFreedom
 import java.util.*
-import kotlin.time.Duration
-
-private const val BACKUP_MIME_TYPE = "application/json"
-private const val SETTINGS_BACKUP_NAME = "droidify_settings"
-private const val REPO_BACKUP_NAME = "droidify_repos"
-private const val CUSTOM_BUTTONS_BACKUP_NAME = "custom_buttons"
 
 private const val FOXY_DROID_TITLE = "FoxyDroid"
 private const val FOXY_DROID_URL = "https://github.com/kitsunyan/foxy-droid"
@@ -65,55 +47,6 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val settings by viewModel.settings.collectAsStateWithLifecycle()
-    val customButtons by viewModel.customButtons.collectAsStateWithLifecycle()
-    val isBackgroundAllowed by viewModel.isBackgroundAllowed.collectAsStateWithLifecycle()
-
-    LaunchedEffect(Unit) {
-        viewModel.updateBackgroundAccessState(context.isIgnoreBatteryEnabled())
-    }
-
-    val exportSettingsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument(BACKUP_MIME_TYPE),
-    ) { uri -> uri?.let { viewModel.exportSettings(it) } }
-
-    val importSettingsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
-    ) { uri ->
-        if (uri != null) {
-            viewModel.importSettings(uri)
-        } else {
-            viewModel.showSnackbar(R.string.file_format_error_DESC)
-        }
-    }
-
-    val exportReposLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument(BACKUP_MIME_TYPE),
-    ) { uri -> uri?.let { viewModel.exportRepos(it) } }
-
-    val importReposLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
-    ) { uri ->
-        if (uri != null) {
-            viewModel.importRepos(uri)
-        } else {
-            viewModel.showSnackbar(R.string.file_format_error_DESC)
-        }
-    }
-
-    val exportCustomButtonsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument(BACKUP_MIME_TYPE),
-    ) { uri -> uri?.let { viewModel.exportCustomButtons(it) } }
-
-    val importCustomButtonsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
-    ) { uri ->
-        if (uri != null) {
-            viewModel.importCustomButtons(uri)
-        } else {
-            viewModel.showSnackbar(R.string.file_format_error_DESC)
-        }
-    }
-
     val uriHandler = LocalUriHandler.current
 
     Scaffold(
@@ -130,19 +63,6 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .padding(contentPadding),
         ) {
-            if (!isBackgroundAllowed && settings.autoSync != AutoSync.NEVER) {
-                item {
-                    WarningBanner(
-                        title = stringResource(R.string.require_background_access),
-                        description = stringResource(R.string.require_background_access_DESC),
-                        onClick = {
-                            context.requestBatteryFreedom()
-                            viewModel.updateBackgroundAccessState(context.isIgnoreBatteryEnabled())
-                        },
-                    )
-                }
-            }
-
             item { SettingHeader(title = stringResource(R.string.prefs_personalization)) }
 
             item {
@@ -199,59 +119,6 @@ fun SettingsScreen(
                 )
             }
 
-            item {
-                SwitchSettingItem(
-                    title = stringResource(R.string.unstable_updates),
-                    description = stringResource(R.string.unstable_updates_summary),
-                    checked = settings.unstableUpdate,
-                    onCheckedChange = viewModel::setUnstableUpdates,
-                )
-            }
-
-            item {
-                SwitchSettingItem(
-                    title = stringResource(R.string.incompatible_versions),
-                    description = stringResource(R.string.incompatible_versions_summary),
-                    checked = settings.incompatibleVersions,
-                    onCheckedChange = viewModel::setIncompatibleUpdates,
-                )
-            }
-
-            item {
-                SwitchSettingItem(
-                    title = stringResource(R.string.ignore_signature),
-                    description = stringResource(R.string.ignore_signature_summary),
-                    checked = settings.ignoreSignature,
-                    onCheckedChange = viewModel::setIgnoreSignature,
-                )
-            }
-
-            item { SettingHeader(title = stringResource(R.string.sync_repositories)) }
-
-            item {
-                AutoSyncSetting(
-                    selectedAutoSync = settings.autoSync,
-                    onAutoSyncSelected = viewModel::setAutoSync,
-                )
-            }
-
-            item {
-                CleanUpIntervalSetting(
-                    selectedInterval = settings.cleanUpInterval,
-                    onIntervalSelected = viewModel::setCleanUpInterval,
-                )
-            }
-
-            if (settings.cleanUpInterval == Duration.INFINITE) {
-                item {
-                    ActionSettingItem(
-                        title = stringResource(R.string.force_clean_up),
-                        description = stringResource(R.string.force_clean_up_DESC),
-                        onClick = { viewModel.forceCleanup(context) },
-                    )
-                }
-            }
-
             item { SettingHeader(title = stringResource(R.string.install_types)) }
 
             item {
@@ -268,89 +135,6 @@ fun SettingsScreen(
                         onComponentSelected = viewModel::setLegacyInstallerComponent,
                     )
                 }
-            }
-
-            item {
-                SwitchSettingItem(
-                    title = stringResource(R.string.delete_apk_on_install),
-                    description = stringResource(R.string.delete_apk_on_install_summary),
-                    checked = settings.deleteApkOnInstall,
-                    onCheckedChange = viewModel::setDeleteApkOnInstall,
-                )
-            }
-
-            item { SettingHeader(title = stringResource(R.string.proxy)) }
-
-            item {
-                ProxyTypeSetting(
-                    selectedProxyType = settings.proxy.type,
-                    onProxyTypeSelected = viewModel::setProxyType,
-                )
-            }
-
-            if (settings.proxy.type != ProxyType.DIRECT) {
-                item {
-                    TextInputSettingItem(
-                        title = stringResource(R.string.proxy_host),
-                        value = settings.proxy.host,
-                        onValueChange = viewModel::setProxyHost,
-                    )
-                }
-
-                item {
-                    TextInputSettingItem(
-                        title = stringResource(R.string.proxy_port),
-                        value = settings.proxy.port.toString(),
-                        onValueChange = viewModel::setProxyPort,
-                    )
-                }
-            }
-
-            item { SettingHeader(title = stringResource(R.string.import_export)) }
-
-            item {
-                ActionSettingItem(
-                    title = stringResource(R.string.import_settings_title),
-                    description = stringResource(R.string.import_settings_DESC),
-                    onClick = { importSettingsLauncher.launch(arrayOf(BACKUP_MIME_TYPE)) },
-                )
-            }
-
-            item {
-                ActionSettingItem(
-                    title = stringResource(R.string.export_settings_title),
-                    description = stringResource(R.string.export_settings_DESC),
-                    onClick = { exportSettingsLauncher.launch(SETTINGS_BACKUP_NAME) },
-                )
-            }
-
-            item {
-                ActionSettingItem(
-                    title = stringResource(R.string.import_repos_title),
-                    description = stringResource(R.string.import_repos_DESC),
-                    onClick = { importReposLauncher.launch(arrayOf(BACKUP_MIME_TYPE)) },
-                )
-            }
-
-            item {
-                ActionSettingItem(
-                    title = stringResource(R.string.export_repos_title),
-                    description = stringResource(R.string.export_repos_DESC),
-                    onClick = { exportReposLauncher.launch(REPO_BACKUP_NAME) },
-                )
-            }
-
-            item { SettingHeader(title = stringResource(R.string.custom_buttons_section)) }
-
-            item {
-                CustomButtonsSettingItem(
-                    buttons = customButtons,
-                    onAddButton = viewModel::addCustomButton,
-                    onUpdateButton = viewModel::updateCustomButton,
-                    onRemoveButton = viewModel::removeCustomButton,
-                    onExport = { exportCustomButtonsLauncher.launch(CUSTOM_BUTTONS_BACKUP_NAME) },
-                    onImport = { importCustomButtonsLauncher.launch(arrayOf(BACKUP_MIME_TYPE)) },
-                )
             }
 
             item { SettingHeader(title = stringResource(R.string.credits)) }
@@ -415,41 +199,6 @@ private fun ThemeSetting(
 }
 
 @Composable
-private fun AutoSyncSetting(
-    selectedAutoSync: AutoSync,
-    onAutoSyncSelected: (AutoSync) -> Unit,
-) {
-    SelectionSettingItem(
-        title = stringResource(R.string.sync_repositories_automatically),
-        selectedValue = selectedAutoSync,
-        values = AutoSync.entries,
-        onValueSelected = onAutoSyncSelected,
-        valueToString = { autoSync ->
-            when (autoSync) {
-                AutoSync.NEVER -> stringResource(R.string.never)
-                AutoSync.WIFI_ONLY -> stringResource(R.string.only_on_wifi)
-                AutoSync.WIFI_PLUGGED_IN -> stringResource(R.string.only_on_wifi_with_charging)
-                AutoSync.ALWAYS -> stringResource(R.string.always)
-            }
-        },
-    )
-}
-
-@Composable
-private fun CleanUpIntervalSetting(
-    selectedInterval: Duration,
-    onIntervalSelected: (Duration) -> Unit,
-) {
-    SelectionSettingItem(
-        title = stringResource(R.string.cleanup_title),
-        selectedValue = selectedInterval,
-        values = cleanUpIntervals,
-        onValueSelected = onIntervalSelected,
-        valueToString = { duration -> duration.toDisplayString() },
-    )
-}
-
-@Composable
 private fun InstallerTypeSetting(
     selectedInstaller: InstallerType,
     onInstallerSelected: (InstallerType) -> Unit,
@@ -498,38 +247,6 @@ private fun LegacyInstallerComponentSetting(
             }
         },
     )
-}
-
-@Composable
-private fun ProxyTypeSetting(
-    selectedProxyType: ProxyType,
-    onProxyTypeSelected: (ProxyType) -> Unit,
-) {
-    SelectionSettingItem(
-        title = stringResource(R.string.proxy_type),
-        selectedValue = selectedProxyType,
-        values = ProxyType.entries,
-        onValueSelected = onProxyTypeSelected,
-        valueToString = { proxyType ->
-            when (proxyType) {
-                ProxyType.DIRECT -> stringResource(R.string.no_proxy)
-                ProxyType.HTTP -> stringResource(R.string.http_proxy)
-                ProxyType.SOCKS -> stringResource(R.string.socks_proxy)
-            }
-        },
-    )
-}
-
-@Composable
-private fun Duration.toDisplayString(): String {
-    if (this == Duration.INFINITE) return stringResource(R.string.never)
-    val hours = inWholeHours.toInt()
-    val days = inWholeDays.toInt()
-    return if (hours >= 24) {
-        "$days " + pluralStringResource(R.plurals.days, days)
-    } else {
-        "$hours " + pluralStringResource(R.plurals.hours, hours)
-    }
 }
 
 @Suppress("DEPRECATION")

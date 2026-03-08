@@ -91,12 +91,10 @@ object RepositoryUpdater {
     suspend fun update(
         context: Context,
         repository: Repository,
-        unstable: Boolean,
         callback: (Stage, Long, Long?) -> Unit,
     ) = update(
         context = context,
         repository = repository,
-        unstable = unstable,
         indexTypes = listOf(IndexType.INDEX_V1),
         callback = callback,
     )
@@ -104,7 +102,6 @@ object RepositoryUpdater {
     private suspend fun update(
         context: Context,
         repository: Repository,
-        unstable: Boolean,
         indexTypes: List<IndexType>,
         callback: (Stage, Long, Long?) -> Unit,
     ): Result<Boolean> = withContext(Dispatchers.IO) {
@@ -120,7 +117,6 @@ object RepositoryUpdater {
                         context = context,
                         repository = repository,
                         indexTypes = indexTypes.subList(1, indexTypes.size),
-                        unstable = unstable,
                         callback = callback,
                     )
                 } else {
@@ -143,7 +139,6 @@ object RepositoryUpdater {
                             context = context,
                             repository = repository,
                             indexType = indexType,
-                            unstable = unstable,
                             file = request.data.file,
                             lastModified = request.data.lastModified,
                             entityTag = request.data.entityTag,
@@ -224,7 +219,6 @@ object RepositoryUpdater {
         context: Context,
         repository: Repository,
         indexType: IndexType,
-        unstable: Boolean,
         file: File,
         mergerFile: File = Cache.getTemporaryFile(context),
         lastModified: String,
@@ -323,7 +317,7 @@ object RepositoryUpdater {
                                 )
                                 Database.UpdaterAdapter.putTemporary(
                                     products
-                                        .map { transformProduct(it, features, unstable) },
+                                        .map { transformProduct(it, features) },
                                 )
                             }
                         }
@@ -405,7 +399,6 @@ object RepositoryUpdater {
     private fun transformProduct(
         product: Product,
         features: Set<String>,
-        unstable: Boolean,
     ): Product {
         val releasePairs = product.releases
             .distinctBy { it.identifier }
@@ -429,8 +422,7 @@ object RepositoryUpdater {
             }
 
         val predicate: (Release) -> Boolean = {
-            unstable ||
-                product.suggestedVersionCode <= 0 ||
+            product.suggestedVersionCode <= 0 ||
                 it.versionCode <= product.suggestedVersionCode
         }
 

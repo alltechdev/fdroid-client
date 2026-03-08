@@ -252,7 +252,6 @@ fun query(
     updates: Boolean,
     skipSignatureCheck: Boolean,
     searchQuery: String,
-    section: ProductItem.Section,
     order: SortOrder,
     signal: CancellationSignal?,
 ): Cursor {
@@ -338,3 +337,9 @@ This legacy database is being replaced by Room:
 - Complete migration in progress
 
 See [Database](../data/database.md) for the new Room-based system.
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `section` parameter in `query()` | [category-filtering.md](../removal/category-filtering.md) |

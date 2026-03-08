@@ -24,8 +24,6 @@ interface AppDao {
         repoId: Int? = null,
         categoriesToInclude: List<DefaultName>? = null,
         categoriesToExclude: List<DefaultName>? = null,
-        antiFeaturesToInclude: List<Tag>? = null,
-        antiFeaturesToExclude: List<Tag>? = null,
         locale: String,
     ): List<AppMinimal>
 }
@@ -262,3 +260,11 @@ suspend fun get(): Entity?  // Single query
 @Transaction
 suspend fun insertIndex(...)  // Multiple operations atomic
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Favourite app DAO methods | [favourites.md](../removal/favourites.md) |
+| `antiFeaturesToInclude`/`antiFeaturesToExclude` parameters | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
+| Anti-feature insertion methods in `IndexDao` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |

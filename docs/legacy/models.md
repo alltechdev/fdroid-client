@@ -226,16 +226,6 @@ data class ProductItem(
 )
 ```
 
-### Section Filter
-
-```kotlin
-sealed class Section {
-    data object All : Section()
-    data class Category(val name: String) : Section()
-    data class Repository(val id: Long) : Section()
-}
-```
-
 ## InstalledItem
 
 Represents an installed app.
@@ -306,3 +296,9 @@ These legacy models are being replaced by Room entities in `data/local/model/`:
 | InstalledItem | InstalledEntity |
 
 The new models use proper foreign keys and are documented in [Models](../data/models.md).
+
+## Removed
+
+| Model | Removal Doc |
+|-------|-------------|
+| `ProductItem.Section` | [category-filtering.md](../removal/category-filtering.md) |

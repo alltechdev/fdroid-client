@@ -1,4 +1,6 @@
-# Custom Buttons
+# Custom Buttons (REMOVED)
+
+> **Removed:** This feature has been removed from the app. The documentation below is kept for historical reference.
 
 User-defined action buttons for quick access to frequent actions.
 
@@ -186,3 +188,9 @@ private suspend fun loadFromFile(): List<CustomButton> = withContext(Dispatchers
   }
 ]
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `CustomButtonRepository` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |

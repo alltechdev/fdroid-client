@@ -104,7 +104,7 @@ class AppListViewModel @Inject constructor(
 
 **File:** `compose/appDetail/AppDetailScreen.kt`
 
-Full app details with versions and screenshots.
+Full app details with screenshots.
 
 ```kotlin
 @Composable
@@ -130,12 +130,11 @@ sealed interface AppDetailState {
 ### Sections
 
 1. **HeaderSection** - Icon, name, version, author, favorite toggle
-2. **CustomButtonsRow** - User-defined action buttons
+2. ~~**CustomButtonsRow**~~ - *Removed*
 3. **ScreenshotsRow** - Horizontal carousel with async loading
 4. **CategoriesRow** - Filter chips for categories
 5. **Summary** - Bold app summary text
 6. **Description** - HTML-rendered description with link handling
-7. **PackageItem** - Version list with suggested badge
 
 ### AppDetailViewModel
 
@@ -144,92 +143,13 @@ sealed interface AppDetailState {
 class AppDetailViewModel @Inject constructor(
     private val appRepository: AppRepository,
     private val repoRepository: RepoRepository,
-    private val customButtonRepository: CustomButtonRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel()
 ```
 
+> **Note:** `customButtonRepository` dependency has been removed.
+
 Uses `SavedStateHandle` to retrieve `packageName` from navigation arguments.
-
-## RepoListScreen
-
-**File:** `compose/repoList/RepoListScreen.kt`
-
-Repository listing with enable/disable toggles.
-
-```kotlin
-@Composable
-fun RepoListScreen(
-    viewModel: RepoListViewModel,
-    onRepoClick: (Int) -> Unit,
-    onBackClick: () -> Unit,
-)
-```
-
-### RepoItem
-
-```kotlin
-@Composable
-private fun RepoItem(
-    onClick: () -> Unit,
-    onToggle: () -> Unit,
-    repo: Repo,
-)
-```
-
-- 80dp row height
-- Grayscale filter for disabled repos
-- FilledIconToggleButton for enable/disable
-
-### Grayscale Effect
-
-```kotlin
-val GrayScaleColorFilter = ColorFilter.colorMatrix(
-    ColorMatrix().apply { setToSaturation(0f) }
-)
-```
-
-## RepoEditScreen
-
-**File:** `compose/repoEdit/RepoEditScreen.kt`
-
-Add or edit repository form.
-
-```kotlin
-@Composable
-fun RepoEditScreen(
-    repoId: Int?,
-    onBackClick: () -> Unit,
-    viewModel: RepoEditViewModel = hiltViewModel(),
-)
-```
-
-### Form Fields
-
-| Field | Type | Validation |
-|-------|------|------------|
-| Address | OutlinedTextField | URL format |
-| Fingerprint | OutlinedTextField | Hex format |
-| Username | OutlinedTextField | Required if auth |
-| Password | OutlinedTextField | PasswordVisualTransformation |
-
-### Error State
-
-```kotlin
-data class ErrorState(
-    val addressError: String? = null,
-    val fingerprintError: String? = null,
-    val usernameError: String? = null,
-    val passwordError: String? = null,
-) {
-    val hasError: Boolean get() = ...
-}
-```
-
-### Features
-- Animated authentication fields visibility
-- Loading overlay with progress indicator
-- Skip validation button
 
 ## SettingsScreen
 
@@ -250,13 +170,20 @@ fun SettingsScreen(
 | Section | Settings |
 |---------|----------|
 | Personalization | Language, Theme, Dynamic colors, Home swiping |
-| Updates | Auto-update, Notify, Unstable, Incompatible, Signature |
-| Sync | Auto-sync mode, Cleanup interval, Force cleanup |
-| Install | Installer type, Legacy component, Delete APK |
-| Proxy | Type, Host, Port |
-| Import/Export | Settings, Repos, Custom buttons |
-| Custom Buttons | Add/Edit/Remove/Export/Import |
+| Updates | Auto-update, Notify |
+| Install | Installer type, Legacy component |
 | Credits | FoxyDroid, Droid-ify version |
+
+### Removed Sections
+
+| Section | Reason |
+|---------|--------|
+| Cleanup interval | Hardcoded to 6 hours |
+| Delete APK | Hardcoded to always delete |
+| Proxy | Feature removed |
+| Import/Export | Feature removed |
+| Custom Buttons | Feature removed |
+| Sync Repositories | Sync always enabled automatically |
 
 ### Setting Components
 
@@ -268,20 +195,19 @@ fun SettingsScreen(
 | `SwitchSettingItem` | Toggle settings |
 | `SelectionSettingItem` | Dropdown/dialog selection |
 | `ActionSettingItem` | Clickable actions |
-| `TextInputSettingItem` | Text input fields |
-| `CustomButtonsSettingItem` | Custom button management |
-| `WarningBanner` | Battery optimization warning |
-| `CustomButtonEditor` | Button add/edit dialog |
 
-### Import/Export
+### Removed Components
 
-Uses `ActivityResultContracts` for file picking:
+| Component | Reason |
+|-----------|--------|
+| `TextInputSettingItem` | Only used for proxy |
+| `CustomButtonsSettingItem` | Custom buttons removed |
+| `CustomButtonEditor` | Custom buttons removed |
+| `WarningBanner` | Auto-sync removed, no battery warning needed |
 
-```kotlin
-val exportSettingsLauncher = rememberLauncherForActivityResult(
-    contract = ActivityResultContracts.CreateDocument(BACKUP_MIME_TYPE),
-) { uri -> uri?.let { viewModel.exportSettings(it) } }
-```
+### Import/Export (REMOVED)
+
+> **Removed:** Import/export functionality has been removed.
 
 ## Shared Components
 
@@ -361,3 +287,13 @@ AsyncImage(
     ...
 )
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `CustomButtonsRow`, `CustomButtonEditor` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| `TextInputSettingItem` (proxy) | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `AutoSyncSetting`, `WarningBanner` | [auto-sync-setting.md](../removal/auto-sync-setting.md) |
+| Favourites filter chip, favourite toggle button | [favourites.md](../removal/favourites.md) |
+| `ReleaseItem`, `PackageItem`, versions list, anti-features section | [versions-antifeatures.md](../removal/versions-antifeatures.md) |

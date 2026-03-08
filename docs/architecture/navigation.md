@@ -14,22 +14,7 @@ Droid-ify uses [Jetpack Navigation Compose](https://developer.android.com/jetpac
 │  │         │      │ (packageName)│      │             │  │
 │  └────┬────┘      └─────────────┘      └─────────────┘  │
 │       │                                       ▲          │
-│       │           ┌─────────────┐             │          │
-│       └──────────►│  RepoList   │─────────────┤          │
-│                   │             │             │          │
-│                   └──────┬──────┘             │          │
-│                          │                    │          │
-│                          ▼                    │          │
-│                   ┌─────────────┐             │          │
-│                   │ RepoDetail  │─────────────┘          │
-│                   │  (repoId)   │                        │
-│                   └──────┬──────┘                        │
-│                          │                               │
-│                          ▼                               │
-│                   ┌─────────────┐                        │
-│                   │  RepoEdit   │                        │
-│                   │  (repoId)   │                        │
-│                   └─────────────┘                        │
+│       └───────────────────────────────────────┘          │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -44,9 +29,6 @@ Routes are defined as `@Serializable` objects or data classes:
 object AppList
 
 @Serializable
-object RepoList
-
-@Serializable
 object Settings
 
 @Serializable
@@ -58,12 +40,6 @@ object Home
 ```kotlin
 @Serializable
 data class AppDetail(val packageName: String)
-
-@Serializable
-data class RepoDetail(val repoId: Int)
-
-@Serializable
-data class RepoEdit(val repoId: Int)
 ```
 
 ## Navigation Files
@@ -75,9 +51,6 @@ Each feature has a navigation file:
 | Home | `compose/home/navigation/HomeNavigation.kt` |
 | AppList | `compose/appList/navigation/AppListNavigation.kt` |
 | AppDetail | `compose/appDetail/navigation/AppDetailNavigation.kt` |
-| RepoList | `compose/repoList/navigation/RepoListNavigation.kt` |
-| RepoDetail | `compose/repoDetail/navigation/RepoDetailNavigation.kt` |
-| RepoEdit | `compose/repoEdit/navigation/RepoEditNavigation.kt` |
 | Settings | `compose/settings/navigation/SettingsNavigation.kt` |
 
 ## Navigation Pattern
@@ -131,7 +104,6 @@ fun MainContent() {
         // Register all routes
         home(
             onNavigateToApps = { navController.navigateToAppList() },
-            onNavigateToRepos = { navController.navigateToRepoList() },
             onNavigateToSettings = { navController.navigateToSettings() },
         )
 
@@ -139,23 +111,10 @@ fun MainContent() {
             onAppClick = { packageName ->
                 navController.navigateToAppDetail(packageName)
             },
-            onNavigateToRepos = { navController.navigateToRepoList() },
             onNavigateToSettings = { navController.navigateToSettings() },
         )
 
         appDetail(onBackClick = { navController.popBackStack() })
-
-        repoList(
-            onRepoClick = { repoId -> navController.navigateToRepoDetail(repoId) },
-            onBackClick = { navController.popBackStack() },
-        )
-
-        repoDetail(
-            onBackClick = { navController.popBackStack() },
-            onEditClick = { repoId -> navController.navigateToRepoEdit(repoId) },
-        )
-
-        repoEdit(onBackClick = { navController.popBackStack() })
 
         settings(onBackClick = { navController.popBackStack() })
     }
@@ -331,3 +290,11 @@ fun testNavigation() {
     )
 }
 ```
+
+## Removed
+
+| Route | Removal Doc |
+|-------|-------------|
+| `RepoList` | [repository-management.md](../removal/repository-management.md) |
+| `RepoDetail` | [repository-management.md](../removal/repository-management.md) |
+| `RepoEdit` | [repository-management.md](../removal/repository-management.md) |

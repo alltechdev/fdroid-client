@@ -1,9 +1,7 @@
 package com.looker.droidify.model
 
-import android.os.Parcelable
 import android.view.View
 import com.looker.droidify.utility.common.extension.dpi
-import kotlinx.parcelize.Parcelize
 
 data class ProductItem(
     var repositoryId: Long,
@@ -18,18 +16,6 @@ data class ProductItem(
     var canUpdate: Boolean,
     var matchRank: Int
 ) {
-    sealed interface Section : Parcelable {
-
-        @Parcelize
-        data object All : Section
-
-        @Parcelize
-        data class Category(val name: String) : Section
-
-        @Parcelize
-        data class Repository(val id: Long, val name: String) : Section
-    }
-
     private val supportedDpi = intArrayOf(120, 160, 240, 320, 480, 640)
     private var deviceDpi: Int = -1
 

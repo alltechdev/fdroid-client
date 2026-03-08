@@ -220,3 +220,7 @@ docs/
 - Add new docs for new features before merging
 - Review docs quarterly for accuracy
 - Keep CLAUDE.md updated with key architecture changes
+
+## Removed
+
+Note: Some features referenced in this plan have been removed. See `docs/removal/` for details.

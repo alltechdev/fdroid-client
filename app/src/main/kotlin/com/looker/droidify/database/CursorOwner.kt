@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import com.looker.droidify.datastore.model.SortOrder
-import com.looker.droidify.model.ProductItem
 import java.util.concurrent.ConcurrentHashMap
 
 class CursorOwner : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
@@ -15,7 +14,6 @@ class CursorOwner : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
         data class Available(
             val searchQuery: String,
-            val section: ProductItem.Section,
             val order: SortOrder,
             val skipSignatureCheck: Boolean = false,
         ) : Request(1)
@@ -85,7 +83,6 @@ class CursorOwner : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                             installed = false,
                             updates = false,
                             searchQuery = request.searchQuery,
-                            section = request.section,
                             order = request.order,
                             signal = it,
                             skipSignatureCheck = request.skipSignatureCheck,
@@ -97,7 +94,6 @@ class CursorOwner : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                             installed = true,
                             updates = false,
                             searchQuery = request.searchQuery,
-                            section = ProductItem.Section.All,
                             order = request.order,
                             signal = it,
                             skipSignatureCheck = request.skipSignatureCheck,
@@ -109,7 +105,6 @@ class CursorOwner : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                             installed = true,
                             updates = true,
                             searchQuery = request.searchQuery,
-                            section = ProductItem.Section.All,
                             order = request.order,
                             signal = it,
                             skipSignatureCheck = request.skipSignatureCheck,

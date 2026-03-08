@@ -175,15 +175,6 @@ Located in `compose/settings/components/`:
 | `CustomButtonsSettingItem` | Custom buttons editor |
 | `WarningBanner` | Warning message |
 
-### RepoDetail Components
-
-Located in `compose/repoDetail/components/`:
-
-| Component | Purpose |
-|-----------|---------|
-| `LastUpdatedCard` | Shows sync time |
-| `UnsyncedRepoState` | Unsynced repo UI |
-
 ## Creating New Components
 
 ### Guidelines
@@ -226,3 +217,11 @@ private fun MyComponentPreview() {
 2. **Slots** - Use slots for flexible composition
 3. **Consistent naming** - Use descriptive names (e.g., `AppListItem`, not `Item`)
 4. **Documentation** - Add KDoc for public components
+
+## Removed
+
+| Component | Removal Doc |
+|-----------|-------------|
+| `CustomButtonsRow` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| `CustomButtonsSettingItem` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| `TextInputSettingItem` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

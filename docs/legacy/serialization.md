@@ -242,6 +242,11 @@ val product = data.jsonParse { it.product() }
 
 This serialization system is used for:
 - Legacy SQLite storage (BLOB columns)
-- Export/Import (backup files)
 
 New Room-based storage uses native SQLite types and doesn't need this serialization.
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Export/Import (backup files) | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

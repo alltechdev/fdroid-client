@@ -56,7 +56,7 @@ data class VersionEntity(
     val id: Int = 0,
 )
 
-fun PackageV2.versionEntities(appId: Int): Map<VersionEntity, List<AntiFeatureAppRelation>> {
+fun PackageV2.versionEntities(appId: Int): List<VersionEntity> {
     return versions.map { (_, version) ->
         VersionEntity(
             added = version.added,
@@ -73,15 +73,8 @@ fun PackageV2.versionEntities(appId: Int): Map<VersionEntity, List<AntiFeatureAp
             permissions = version.manifest.usesPermission,
             permissionsSdk23 = version.manifest.usesPermissionSdk23,
             appId = appId,
-        ) to version.antiFeatures.map { (tag, reason) ->
-            AntiFeatureAppRelation(
-                tag = tag,
-                reason = reason,
-                appId = appId,
-                versionCode = version.manifest.versionCode,
-            )
-        }
-    }.toMap()
+        )
+    }
 }
 
 fun List<VersionEntity>.toPackages(
@@ -99,7 +92,6 @@ fun List<VersionEntity>.toPackages(
         ),
         platforms = Platforms(version.nativeCode),
         features = version.features,
-        antiFeatures = emptyList(), // This would need to be populated from AntiFeatureAppRelation
         manifest = Manifest(
             versionCode = version.versionCode,
             versionName = version.versionName,

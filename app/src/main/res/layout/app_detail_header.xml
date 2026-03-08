@@ -151,15 +151,4 @@
                 android:textAppearance="?textAppearanceBodyMedium" />
         </LinearLayout>
     </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/favourite"
-        style="@style/FavouriteTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checkable="true"
-        android:padding="16dp"
-        app:icon="@drawable/favourite_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

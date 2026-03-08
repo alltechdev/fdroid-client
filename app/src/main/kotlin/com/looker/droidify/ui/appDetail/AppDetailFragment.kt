@@ -6,11 +6,11 @@ import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
+import androidx.core.os.BundleCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -47,7 +47,6 @@ import com.looker.droidify.utility.common.extension.isFirstItemVisible
 import com.looker.droidify.utility.common.extension.isSystemApplication
 import com.looker.droidify.utility.common.extension.systemBarsPadding
 import com.looker.droidify.utility.common.extension.updateAsMutable
-import com.looker.droidify.utility.common.shareUrl
 import com.looker.droidify.utility.extension.mainActivity
 import com.looker.droidify.utility.extension.startUpdate
 import com.stfalcon.imageviewer.StfalconImageViewer
@@ -78,10 +77,6 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
         INSTALL(1, AppDetailAdapter.Action.INSTALL),
         UPDATE(2, AppDetailAdapter.Action.UPDATE),
         LAUNCH(3, AppDetailAdapter.Action.LAUNCH),
-        DETAILS(4, AppDetailAdapter.Action.DETAILS),
-        UNINSTALL(5, AppDetailAdapter.Action.UNINSTALL),
-        SOURCE(6, AppDetailAdapter.Action.SOURCE),
-        SHARE(7, AppDetailAdapter.Action.SHARE),
     }
 
     private class Installed(
@@ -146,11 +141,11 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
                 isVerticalScrollBarEnabled = false
                 adapter = detailAdapter
                 (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-                if (detailAdapter != null) {
-                    savedInstanceState?.getParcelable<AppDetailAdapter.SavedState>(STATE_ADAPTER)
+                if (detailAdapter != null && savedInstanceState != null) {
+                    BundleCompat.getParcelable(savedInstanceState, STATE_ADAPTER, AppDetailAdapter.SavedState::class.java)
                         ?.let(detailAdapter!!::restoreState)
                 }
-                layoutManagerState = savedInstanceState?.getParcelable(STATE_LAYOUT_MANAGER)
+                layoutManagerState = savedInstanceState?.let { BundleCompat.getParcelable(it, STATE_LAYOUT_MANAGER, LinearLayoutManager.SavedState::class.java) }
                 recyclerView = this
                 systemBarsPadding(includeFab = false)
             },
@@ -191,15 +186,8 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
                             rblogs = state.rblogs,
                             downloads = state.downloads,
                             installedItem = state.installedItem,
-                            isFavourite = state.isFavourite,
-                            allowIncompatibleVersion = state.allowIncompatibleVersions,
                         )
                         updateButtons()
-                    }
-                }
-                launch {
-                    viewModel.customButtons.collectLatest { buttons ->
-                        (recyclerView?.adapter as? AppDetailAdapter)?.setCustomButtons(buttons)
                     }
                 }
                 launch {
@@ -245,7 +233,6 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
         val canUpdate =
             product != null && compatible && product.canUpdate(installed?.installedItem) &&
                     !preference.shouldIgnoreUpdate(product.versionCode)
-        val canUninstall = product != null && installed != null && !installed.isSystem
         val canLaunch =
             product != null && installed != null && installed.launcherActivities.isNotEmpty()
 
@@ -253,18 +240,13 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
             if (canInstall) add(Action.INSTALL)
             if (canUpdate) add(Action.UPDATE)
             if (canLaunch) add(Action.LAUNCH)
-            if (installed != null) add(Action.DETAILS)
-            if (canUninstall) add(Action.UNINSTALL)
-            add(Action.SHARE)
-            add(Action.SOURCE)
         }
 
         val primaryAction = when {
             canUpdate -> Action.UPDATE
             canLaunch -> Action.LAUNCH
             canInstall -> Action.INSTALL
-            installed != null -> Action.DETAILS
-            else -> Action.SHARE
+            else -> Action.INSTALL
         }
 
         val adapterAction = when {
@@ -299,9 +281,6 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
         val displayActions = actions.updateAsMutable {
             if (isActionVisible && primaryAction != null) {
                 remove(primaryAction)
-            }
-            if (size >= 4 && resources.configuration.screenWidthDp < 400) {
-                remove(Action.DETAILS)
             }
         }
         Action.entries.forEach { action ->
@@ -393,17 +372,6 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
                 }
             }
 
-            AppDetailAdapter.Action.DETAILS -> {
-                startActivity(
-                    Intent(
-                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        "package:${viewModel.packageName}".toUri(),
-                    ),
-                )
-            }
-
-            AppDetailAdapter.Action.UNINSTALL -> viewModel.uninstallPackage()
-
             AppDetailAdapter.Action.CANCEL -> {
                 val binder = downloadConnection.binder
                 if (installing?.isCancellable == true) {
@@ -412,43 +380,6 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
                     binder.cancel(viewModel.packageName)
                 }
             }
-
-            AppDetailAdapter.Action.SHARE -> {
-                val repo = products[0].second
-                val address = when {
-                    "https://f-droid.org/repo" in repo.mirrors ->
-                        "https://f-droid.org/packages/${viewModel.packageName}/"
-
-                    "https://f-droid.org/archive/repo" in repo.mirrors ->
-                        "https://f-droid.org/packages/${viewModel.packageName}/"
-
-                    "https://apt.izzysoft.de/fdroid/repo" in repo.mirrors ->
-                        "https://apt.izzysoft.de/fdroid/index/apk/${viewModel.packageName}"
-
-                    else -> shareUrl(viewModel.packageName, repo.address)
-                }
-                val sendIntent = Intent(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_TEXT, address)
-                    .setType("text/plain")
-                startActivity(Intent.createChooser(sendIntent, null))
-            }
-
-            AppDetailAdapter.Action.SOURCE -> {
-                val link = products[0].first.source
-                startActivity(Intent(Intent.ACTION_VIEW, link.toUri()))
-            }
-        }
-    }
-
-    override fun onFavouriteClicked() {
-        viewModel.setFavouriteState()
-    }
-
-    override fun onCustomButtonClick(url: String) {
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
-        } catch (e: ActivityNotFoundException) {
-            e.printStackTrace()
         }
     }
 
@@ -467,11 +398,6 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
 
     override fun onPreferenceChanged(preference: ProductPreference) {
         updateButtons(preference)
-    }
-
-    override fun onPermissionsClick(group: String?, permissions: List<String>) {
-        MessageDialog(Message.Permissions(group, permissions))
-            .show(childFragmentManager)
     }
 
     override fun onScreenshotClick(position: Int) {
@@ -497,62 +423,7 @@ class AppDetailFragment() : ScreenFragment(), AppDetailAdapter.Callbacks {
         imageViewer?.show()
     }
 
-    override fun onReleaseClick(release: Release) {
-        val installedItem = installed?.installedItem
-        when {
-            release.incompatibilities.isNotEmpty() -> {
-                MessageDialog(
-                    Message.ReleaseIncompatible(
-                        release.incompatibilities,
-                        release.platforms,
-                        release.minSdkVersion,
-                        release.maxSdkVersion,
-                    ),
-                ).show(childFragmentManager)
-            }
-
-            Cache.getEmptySpace(requireContext()) < release.size -> {
-                MessageDialog(Message.InsufficientStorage).show(childFragmentManager)
-            }
-
-            installedItem != null && installedItem.versionCode > release.versionCode -> {
-                MessageDialog(Message.ReleaseOlder).show(childFragmentManager)
-            }
-
-            installedItem != null && installedItem.signature != release.signature -> {
-                lifecycleScope.launch {
-                    if (viewModel.shouldIgnoreSignature()) {
-                        queueReleaseInstall(release, installedItem)
-                    } else {
-                        MessageDialog(Message.ReleaseSignatureMismatch).show(childFragmentManager)
-                    }
-                }
-            }
-
-            else -> {
-                queueReleaseInstall(release, installedItem)
-            }
-        }
-    }
-
-    private fun queueReleaseInstall(release: Release, installedItem: InstalledItem?) {
-        val productRepository =
-            products.asSequence().filter { (product, _) ->
-                product.releases.any { it === release }
-            }.firstOrNull()
-        if (productRepository != null) {
-            downloadConnection.binder?.enqueue(
-                viewModel.packageName,
-                productRepository.first.name,
-                productRepository.second,
-                release,
-                installedItem != null,
-            )
-        }
-    }
-
     override fun onRequestAddRepository(address: String) {
-        mainActivity.navigateAddRepository(address)
     }
 
     override fun onUriClick(uri: Uri, shouldConfirm: Boolean): Boolean {

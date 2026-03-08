@@ -61,9 +61,7 @@ onCreate()
     │
     ├── updatePreference() ─────────► Observe settings changes
     │       │
-    │       ├── unstableUpdate ─────► Force sync when toggled
-    │       ├── autoSync ───────────► Update sync job schedule
-    │       └── cleanUpInterval ────► Schedule/cancel cleanup worker
+    │       └── autoSync ───────────► Update sync job schedule
     │
     └── installer() ────────────────► Start install manager
 ```
@@ -204,3 +202,13 @@ if (SdkCheck.isSnowCake) {  // Android 12+
     // Use Material You
 }
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Repository management UI | [repository-management.md](../removal/repository-management.md) |
+| Favourites feature | [favourites.md](../removal/favourites.md) |
+| Custom buttons | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| Proxy settings | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| Auto-sync settings | [auto-sync-setting.md](../removal/auto-sync-setting.md) |

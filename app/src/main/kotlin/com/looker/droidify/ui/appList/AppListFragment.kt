@@ -6,6 +6,7 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.BundleCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.looker.droidify.R
 import com.looker.droidify.database.CursorOwner
 import com.looker.droidify.databinding.RecyclerViewWithFabBinding
-import com.looker.droidify.model.ProductItem
 import com.looker.droidify.utility.common.Scroller
 import com.looker.droidify.utility.common.extension.dp
 import com.looker.droidify.utility.common.extension.isFirstItemVisible
@@ -39,12 +39,11 @@ class AppListFragment() : Fragment(), CursorOwner.Callback {
 
     enum class Source(
         val titleResId: Int,
-        val sections: Boolean,
         val updateAll: Boolean,
     ) {
-        AVAILABLE(stringRes.available, true, false),
-        INSTALLED(stringRes.installed, false, false),
-        UPDATES(stringRes.updates, false, true)
+        AVAILABLE(stringRes.available, false),
+        INSTALLED(stringRes.installed, false),
+        UPDATES(stringRes.updates, true)
     }
 
     constructor(source: Source) : this() {
@@ -135,7 +134,7 @@ class AppListFragment() : Fragment(), CursorOwner.Callback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        layoutManagerState = savedInstanceState?.getParcelable(STATE_LAYOUT_MANAGER)
+        layoutManagerState = savedInstanceState?.let { BundleCompat.getParcelable(it, STATE_LAYOUT_MANAGER, Parcelable::class.java) }
         mainActivity.cursorOwner.attach(
             callback = this,
             request = viewModel.state.value.toRequest(source, searchQuery),
@@ -204,9 +203,5 @@ class AppListFragment() : Fragment(), CursorOwner.Callback {
                 request = viewModel.state.value.toRequest(source, searchQuery),
             )
         }
-    }
-
-    fun setSection(section: ProductItem.Section) {
-        viewModel.setSection(section)
     }
 }

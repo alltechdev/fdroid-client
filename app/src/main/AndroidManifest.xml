@@ -19,16 +19,12 @@
         tools:ignore="QueryAllPackagesPermission" />
 
     <uses-feature
-        android:name="android.software.leanback"
-        android:required="false" />
-    <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
     <application
         android:name=".Droidify"
         android:allowBackup="true"
-        android:banner="@drawable/tv_banner"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/application_name"
@@ -58,101 +54,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="fdroid.app" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="details"
-                    android:scheme="market" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="search"
-                    android:scheme="market" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="f-droid.org" />
-                <data android:host="www.f-droid.org" />
-                <data android:host="staging.f-droid.org" />
-                <data android:pathPattern="/app/.*" />
-                <data android:pathPattern="/packages/.*" />
-                <data android:pathPattern="/.*/packages/.*" />
-            </intent-filter>
-
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="apt.izzysoft.de" />
-                <data android:pathPattern="/fdroid/index/apk/.*" />
-            </intent-filter>
-
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="https" />
-                <data android:host="droidify.eu.org" />
-                <data android:pathPattern="/app/.*" />
-            </intent-filter>
-
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="https" />
-                <data android:host="droidify.app" />
-                <data android:pathPattern="/app/.*" />
-            </intent-filter>
-
-            <!--Adding repo with special url-->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="fdroidrepo" />
-                <data android:scheme="fdroidrepos" />
-            </intent-filter>
-
         </activity>
 
         <service

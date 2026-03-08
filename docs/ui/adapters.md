@@ -70,17 +70,16 @@ class AppDetailAdapter(private val callbacks: Callbacks) :
 
 ```kotlin
 enum class ViewType {
-    HEADER,           // Icon, name, summary
-    SWITCH,           // Ignore updates toggle
-    SCREENSHOTS,      // Horizontal screenshot carousel
+    APP_INFO,         // Icon, name, summary
+    DOWNLOAD_STATUS,  // Download progress
+    INSTALL_BUTTON,   // Install/update button
+    SCREENSHOT,       // Horizontal screenshot carousel
     SECTION,          // Section header
     EXPAND,           // Show more button
     TEXT,             // Description text
-    LINK,             // URL link
-    PERMISSIONS,      // Permission list
+    LINK,             // URL link (donate links)
     RELEASE,          // Release version item
     EMPTY,            // Empty state
-    CUSTOM_BUTTONS,   // User-defined action buttons
 }
 ```
 
@@ -89,26 +88,24 @@ enum class ViewType {
 ```kotlin
 interface Callbacks {
     fun onActionClick(action: Action)
-    fun onFavouriteToggled()
     fun onPreferenceChanged(preference: ProductPreference)
-    fun onPermissionsClick(permissions: List<String>, group: String)
-    fun onScreenshotClick(index: Int, screenshots: List<Product.Screenshot>)
+    fun onScreenshotClick(position: Int)
     fun onReleaseClick(release: Release)
+    fun onRequestAddRepository(address: String)
+    fun onUriClick(uri: Uri, shouldConfirm: Boolean): Boolean
 }
 ```
 
 ### Actions
 
 ```kotlin
-sealed interface Action {
-    data object Install : Action
-    data object Update : Action
-    data object Uninstall : Action
-    data object Cancel : Action
-    data object Launch : Action
-    data object Details : Action
-    data object Share : Action
-    data class Custom(val button: CustomButton) : Action
+enum class Action(@StringRes val titleResId: Int, @DrawableRes val iconResId: Int) {
+    INSTALL(R.string.install, R.drawable.ic_download),
+    UPDATE(R.string.update, R.drawable.ic_download),
+    LAUNCH(R.string.launch, R.drawable.ic_launch),
+    DETAILS(R.string.details, R.drawable.ic_tune),
+    UNINSTALL(R.string.uninstall, R.drawable.ic_delete),
+    CANCEL(R.string.cancel, R.drawable.ic_cancel),
 }
 ```
 
@@ -119,19 +116,6 @@ Limited to first 5 releases by default:
 companion object {
     private const val MAX_RELEASE_ITEMS = 5
 }
-```
-
-## RepositoriesAdapter
-
-**File:** `ui/repository/RepositoriesAdapter.kt`
-
-Lists repositories with enable/disable switch.
-
-```kotlin
-class RepositoriesAdapter(
-    private val onSwitch: (Repository, Boolean) -> Unit,
-    private val onClick: (Repository) -> Unit,
-) : RecyclerView.Adapter<RepositoriesAdapter.ViewHolder>()
 ```
 
 ## ScreenshotsAdapter
@@ -145,24 +129,6 @@ class ScreenshotsAdapter(
     private val onClick: (Int) -> Unit,
 ) : RecyclerView.Adapter<ScreenshotsAdapter.ViewHolder>()
 ```
-
-## CustomButtonsAdapter
-
-**File:** `ui/appDetail/CustomButtonsAdapter.kt`
-
-User-defined action buttons in app detail.
-
-```kotlin
-class CustomButtonsAdapter(
-    private val onClick: (CustomButton) -> Unit,
-) : RecyclerView.Adapter<CustomButtonsAdapter.ViewHolder>()
-```
-
-## FavouriteFragmentAdapter
-
-**File:** `ui/favourites/FavouriteFragmentAdapter.kt`
-
-Lists bookmarked apps.
 
 ## Base Classes
 
@@ -228,3 +194,25 @@ init {
 - Stable IDs enable item animations
 - ViewHolder recycling minimizes allocations
 - Coil caches loaded images
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `RepositoriesAdapter` | [repository-management.md](../removal/repository-management.md) |
+| `CustomButtonsAdapter` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| `FavouriteFragmentAdapter` | [favourites.md](../removal/favourites.md) |
+| `ViewType.SWITCH` | [version-settings.md](../removal/version-settings.md) |
+| `ViewType.PERMISSIONS` | [app-detail-permissions.md](../removal/app-detail-permissions.md) |
+| `ViewType.CUSTOM_BUTTONS` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| `onPermissionsClick` | [app-detail-permissions.md](../removal/app-detail-permissions.md) |
+| `onFavouriteToggled` | [favourites.md](../removal/favourites.md) |
+| `Action.Custom` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| `Action.SHARE` | [share-source-actions.md](../removal/share-source-actions.md) |
+| `Action.SOURCE` | [share-source-actions.md](../removal/share-source-actions.md) |
+| `ViewType.VERSION` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
+| `ViewType.EMPTY` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
+| `VersionViewHolder` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
+| `Item.VersionItem` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |
+| `Action.DETAILS` | [app-info-uninstall-actions.md](../removal/app-info-uninstall-actions.md) |
+| `Action.UNINSTALL` | [app-info-uninstall-actions.md](../removal/app-info-uninstall-actions.md) |

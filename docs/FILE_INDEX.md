@@ -40,29 +40,6 @@ Every Kotlin source file in the project (255 files total).
 | `HomeScreen.kt` | Home screen composable |
 | `navigation/HomeNavigation.kt` | Navigation graph entry |
 
-### compose/repoDetail/
-| File | Purpose |
-|------|---------|
-| `RepoDetailScreen.kt` | Repository detail screen |
-| `RepoDetailViewModel.kt` | ViewModel for repo details |
-| `components/LastUpdatedCard.kt` | Last sync timestamp card |
-| `components/UnsyncedRepoState.kt` | Unsynced repo indicator |
-| `navigation/RepoDetailNavigation.kt` | Navigation entry |
-
-### compose/repoEdit/
-| File | Purpose |
-|------|---------|
-| `RepoEditScreen.kt` | Add/edit repository screen |
-| `RepoEditViewModel.kt` | ViewModel for editing repos |
-| `navigation/RepoEditNavigation.kt` | Navigation entry |
-
-### compose/repoList/
-| File | Purpose |
-|------|---------|
-| `RepoListScreen.kt` | Repository list screen |
-| `RepoListViewModel.kt` | ViewModel for repo list |
-| `navigation/RepoListNavigation.kt` | Navigation entry |
-
 ### compose/settings/
 | File | Purpose |
 |------|---------|
@@ -141,7 +118,6 @@ Every Kotlin source file in the project (255 files total).
 ### data/local/model/
 | File | Purpose |
 |------|---------|
-| `AntiFeatureEntity.kt` | Anti-feature Room entity |
 | `AppEntity.kt` | App Room entity + relations |
 | `AuthenticationEntity.kt` | Encrypted auth entity |
 | `AuthorEntity.kt` | App author entity |
@@ -180,7 +156,6 @@ Every Kotlin source file in the project (255 files total).
 | `ObservableCursor.kt` | Observable cursor wrapper |
 | `QueryBuilder.kt` | SQL query builder |
 | `QueryLoader.kt` | Background query loading |
-| `RepositoryExporter.kt` | JSON export/import for repos |
 | `table/DatabaseHelper.kt` | SQLite open helper |
 | `table/Table.kt` | Table definitions (Schema, Installed, etc.) |
 
@@ -205,7 +180,7 @@ Every Kotlin source file in the project (255 files total).
 | `LegacyInstallerComponent.kt` | Legacy installer selection |
 | `ProxyPreference.kt` | Proxy settings data class |
 | `ProxyType.kt` | Proxy type enum |
-| `SortOrder.kt` | Sort order enum + supported list |
+| `SortOrder.kt` | Sort order enum |
 | `Theme.kt` | Theme enum |
 
 ## di/
@@ -366,15 +341,6 @@ Every Kotlin source file in the project (255 files total).
 | `FavouritesFragment.kt` | Favorites fragment |
 | `FavouritesViewModel.kt` | Favorites ViewModel |
 
-### ui/repository/
-| File | Purpose |
-|------|---------|
-| `EditRepositoryFragment.kt` | Add/edit repo fragment |
-| `RepositoriesAdapter.kt` | Repo list adapter |
-| `RepositoriesFragment.kt` | Repo list fragment |
-| `RepositoryFragment.kt` | Repo detail fragment |
-| `RepositoryViewModel.kt` | Repo detail ViewModel |
-
 ### ui/settings/
 | File | Purpose |
 |------|---------|
@@ -391,7 +357,6 @@ Every Kotlin source file in the project (255 files total).
 ### utility/ (root)
 | File | Purpose |
 |------|---------|
-| `PackageItemResolver.kt` | Permission info resolver |
 | `ProgressInputStream.kt` | Progress-reporting input stream |
 
 ### utility/common/
@@ -483,3 +448,16 @@ Every Kotlin source file in the project (255 files total).
 ---
 
 **Total: 255 Kotlin source files**
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `FavouritesFragment.kt`, `FavouritesViewModel.kt`, `FavouriteFragmentAdapter.kt` | [favourites.md](removal/favourites.md) |
+| `RepositoriesFragment.kt`, `EditRepositoryFragment.kt`, `RepositoryFragment.kt`, `RepositoryViewModel.kt`, `RepositoriesAdapter.kt` | [repository-management.md](removal/repository-management.md) |
+| `CustomButtonsAdapter.kt`, `CustomButtonRepository.kt`, `CustomButton.kt` | [custom-buttons-and-settings.md](removal/custom-buttons-and-settings.md) |
+| `SettingsExporter.kt`, `ProxyPreference.kt`, `ProxyType.kt`, `AutoSync.kt`, `Exporter.kt`, `RepositoryExporter.kt` | [proxy-and-backup.md](removal/proxy-and-backup.md) |
+| `PackageItemResolver.kt` | [app-detail-permissions.md](removal/app-detail-permissions.md) |
+| `ReleaseItem.kt` | [versions-antifeatures.md](removal/versions-antifeatures.md) |
+| `AntiFeatureEntity.kt` | [versions-antifeatures.md](removal/versions-antifeatures.md) |
+| `ic_tune.xml` | [app-info-uninstall-actions.md](removal/app-info-uninstall-actions.md) |

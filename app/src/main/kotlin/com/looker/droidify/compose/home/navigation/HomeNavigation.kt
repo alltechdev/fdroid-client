@@ -19,13 +19,11 @@ fun NavController.navigateToHome() {
 
 fun NavGraphBuilder.home(
     onNavigateToApps: () -> Unit,
-    onNavigateToRepos: () -> Unit,
     onNavigateToSettings: () -> Unit,
 ) {
     composable<Home> {
         HomeScreen(
             onNavigateToApps = onNavigateToApps,
-            onNavigateToRepos = onNavigateToRepos,
             onNavigateToSettings = onNavigateToSettings,
         )
     }

@@ -133,15 +133,6 @@ private val supportedExternalHosts = arrayOf(
 )
 ```
 
-## Share URL Generation
-
-```kotlin
-fun shareUrl(packageName: String, repoAddress: String) =
-    "https://droidify.app/app/?id=${packageName}&repo_address=${repoAddress}"
-```
-
-**Example:** `https://droidify.app/app/?id=com.example&repo_address=https://f-droid.org/repo`
-
 ## Install Intent Helper
 
 ```kotlin
@@ -241,3 +232,10 @@ adb shell am start -a android.intent.action.VIEW \
 adb shell am start -a android.intent.action.VIEW \
     -d "https://droidify.app/app/?id=com.example"
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `shareUrl()` | [share-source-actions.md](../removal/share-source-actions.md) |
+| `DeeplinkType`, `deeplinkType()`, all intent filters | [deeplinks.md](../removal/deeplinks.md) |

@@ -30,7 +30,6 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
@@ -54,9 +53,7 @@ class InstallManager(
     private val installer: Installer get() = _installer!!
 
     private val lock = Mutex()
-    private val skipSignature = settingsRepository.get { ignoreSignature }
     private val installerPreference = settingsRepository.get { installerType }
-    private val deleteApkPreference = settingsRepository.get { deleteApkOnInstall }
     private val notificationManager by lazy { context.notificationManager }
 
     suspend operator fun invoke() = coroutineScope {
@@ -111,13 +108,11 @@ class InstallManager(
                 )
                 val result = installer.use { it.install(item) }
                 if (result == InstallState.Installed) {
-                    if (deleteApkPreference.first()) {
-                        val apkFile = Cache.getReleaseFile(context, item.installFileName)
-                        apkFile.delete()
-                    }
+                    val apkFile = Cache.getReleaseFile(context, item.installFileName)
+                    apkFile.delete()
                 }
                 if (result == InstallState.Installed && SyncService.autoUpdating) {
-                    val updates = Database.ProductAdapter.getUpdates(skipSignature.first())
+                    val updates = Database.ProductAdapter.getUpdates(false)
                     when {
                         updates.isEmpty() -> {
                             SyncService.autoUpdating = false

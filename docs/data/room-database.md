@@ -12,7 +12,7 @@ Primary data storage using Room with optimized settings.
 
 ```kotlin
 @Database(
-    version = 2,
+    version = 1,
     exportSchema = true,
     entities = [
         // Core entities
@@ -26,9 +26,6 @@ Primary data storage using Room with optimized settings.
         CategoryEntity::class,
         CategoryAppRelation::class,
         CategoryRepoRelation::class,
-        AntiFeatureEntity::class,
-        AntiFeatureAppRelation::class,
-        AntiFeatureRepoRelation::class,
 
         // App metadata
         AuthorEntity::class,
@@ -111,8 +108,6 @@ fun droidifyDatabase(context: Context): DroidifyDatabase = Room
 |--------|---------|
 | `CategoryAppRelation` | App ↔ Category |
 | `CategoryRepoRelation` | Repo ↔ Category |
-| `AntiFeatureAppRelation` | App ↔ AntiFeature |
-| `AntiFeatureRepoRelation` | Repo ↔ AntiFeature |
 
 ### Localized Entities
 
@@ -199,3 +194,9 @@ object PermissionConverter {
 ```
 
 Database wipes on schema changes since data can be re-synced from repositories.
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `AntiFeatureEntity`, `AntiFeatureAppRelation`, `AntiFeatureRepoRelation` | [versions-antifeatures.md](../removal/versions-antifeatures.md) |

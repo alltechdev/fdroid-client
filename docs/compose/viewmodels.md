@@ -18,8 +18,6 @@ Manages all app settings.
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,
-    private val repositoryExporter: RepositoryExporter,
-    private val customButtonRepository: CustomButtonRepository,
     private val handler: StringHandler,
 ) : ViewModel()
 ```
@@ -28,10 +26,13 @@ class SettingsViewModel @Inject constructor(
 
 ```kotlin
 val settings = settingsRepository.data.asStateFlow(Settings())
-val customButtons: StateFlow<List<CustomButton>> = customButtonRepository.buttons
-    .asStateFlow(emptyList())
 val isBackgroundAllowed = MutableStateFlow(true).asStateFlow()
 ```
+
+### Removed Dependencies
+
+- `repositoryExporter: RepositoryExporter` - Import/export removed
+- `customButtonRepository: CustomButtonRepository` - Custom buttons removed
 
 ### Theme Settings
 
@@ -73,24 +74,30 @@ private suspend fun handleShizukuInstaller(context: Context, installerType: Inst
 }
 ```
 
-### Import/Export
+### Import/Export (REMOVED)
+
+> **Removed:** Import/export and custom buttons features have been removed.
 
 ```kotlin
-fun exportSettings(uri: Uri)
-fun importSettings(uri: Uri)
-fun exportRepos(uri: Uri)
-fun importRepos(uri: Uri)
-fun exportCustomButtons(uri: Uri)
-fun importCustomButtons(uri: Uri)
+// Previously available:
+// fun exportSettings(uri: Uri)
+// fun importSettings(uri: Uri)
+// fun exportRepos(uri: Uri)
+// fun importRepos(uri: Uri)
+// fun exportCustomButtons(uri: Uri)
+// fun importCustomButtons(uri: Uri)
 ```
 
-### Cleanup Intervals
+### Cleanup Intervals (REMOVED)
+
+> **Removed:** Cleanup interval is now hardcoded to 6 hours.
 
 ```kotlin
 companion object {
-    val cleanUpIntervals: List<Duration> = listOf(
-        6.hours, 12.hours, 18.hours, 1.days, 2.days, Duration.INFINITE
-    )
+    // Previously configurable:
+    // val cleanUpIntervals: List<Duration> = listOf(
+    //     6.hours, 12.hours, 18.hours, 1.days, 2.days, Duration.INFINITE
+    // )
     val localeCodesList: List<String> = BuildConfig.DETECTED_LOCALES.toList()
 }
 ```
@@ -99,7 +106,9 @@ companion object {
 
 **File:** `compose/appDetail/AppDetailViewModel.kt`
 
-Shows app details and available versions.
+> **Note:** `customButtonRepository` dependency has been removed.
+
+Shows app details.
 
 ```kotlin
 @HiltViewModel
@@ -168,63 +177,6 @@ val sortOrder: StateFlow<SortOrder>
 val categories: StateFlow<List<String>>
 ```
 
-## RepoListViewModel
-
-**File:** `compose/repoList/RepoListViewModel.kt`
-
-Lists repositories with enable/disable.
-
-```kotlin
-@HiltViewModel
-class RepoListViewModel @Inject constructor(
-    private val repoRepository: RepoRepository,
-    private val settingsRepository: SettingsRepository,
-) : ViewModel()
-
-val repos: StateFlow<List<RepoWithEnabled>>
-fun toggleRepo(repoId: Int, enabled: Boolean)
-```
-
-## RepoDetailViewModel
-
-**File:** `compose/repoDetail/RepoDetailViewModel.kt`
-
-Shows repository details and app count.
-
-```kotlin
-@HiltViewModel
-class RepoDetailViewModel @Inject constructor(
-    private val repoRepository: RepoRepository,
-    savedStateHandle: SavedStateHandle,
-) : ViewModel()
-
-val repoId: Int = requireNotNull(savedStateHandle["repoId"])
-val repo: StateFlow<RepoDetail?>
-```
-
-## RepoEditViewModel
-
-**File:** `compose/repoEdit/RepoEditViewModel.kt`
-
-Add or edit repository.
-
-```kotlin
-@HiltViewModel
-class RepoEditViewModel @Inject constructor(
-    private val repoRepository: RepoRepository,
-    savedStateHandle: SavedStateHandle,
-) : ViewModel()
-
-val repoId: Int? = savedStateHandle["repoId"]
-val address: MutableStateFlow<String>
-val fingerprint: MutableStateFlow<String>
-val username: MutableStateFlow<String>
-val password: MutableStateFlow<String>
-
-fun save()
-fun delete()
-```
-
 ## Common Patterns
 
 ### SavedStateHandle for Navigation Args
@@ -276,3 +228,13 @@ fun showSnackbar(@StringRes messageRes: Int) {
 │  - Calls ViewModel methods                                  │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| Import/export methods in `SettingsViewModel` | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| `customButtonRepository` dependency | [custom-buttons-and-settings.md](../removal/custom-buttons-and-settings.md) |
+| Cleanup interval configuration | [version-settings.md](../removal/version-settings.md) |
+| `sortOrder` in `TabsViewModel`, `setSortOrder()` | [sort-order-ui.md](../removal/sort-order-ui.md) |
+| Versions list state/logic | [versions-antifeatures.md](../removal/versions-antifeatures.md) |

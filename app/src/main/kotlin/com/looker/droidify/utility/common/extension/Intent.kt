@@ -3,7 +3,6 @@ package com.looker.droidify.utility.common.extension
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.core.app.TaskStackBuilder
 import com.looker.droidify.utility.common.SdkCheck
 
@@ -23,5 +22,3 @@ fun Intent.toPendingIntent(context: Context): PendingIntent? =
         .create(context)
         .addNextIntentWithParentStack(this)
         .getPendingIntent(0, intentFlagCompat)
-
-operator fun Uri?.get(key: String): String? = this?.getQueryParameter(key)

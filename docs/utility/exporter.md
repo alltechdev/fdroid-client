@@ -238,3 +238,12 @@ suspend fun safeExport(): ExportResult {
 3. **Coroutine scope** - All operations are suspend functions
 4. **Validation** - Validate imported data before applying
 5. **Error handling** - Wrap in try-catch for user feedback
+
+## Removed
+
+| Feature | Removal Doc |
+|---------|-------------|
+| `Exporter<T>` interface | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `RepositoryExporter` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| `SettingsExporter` | [proxy-and-backup.md](../removal/proxy-and-backup.md) |
+| Settings import/export UI | [proxy-and-backup.md](../removal/proxy-and-backup.md) |

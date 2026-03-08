@@ -30,12 +30,11 @@ interface RepoDao {
 
     @Query(
         """
-        SELECT * FROM category
+        SELECT category.* FROM category
         JOIN category_repo_relation ON category.defaultName = category_repo_relation.defaultName
         WHERE category_repo_relation.id = :repoId
         """
     )
-    @RewriteQueriesToDropUnusedColumns
     fun categoriesByRepoId(repoId: Int): Flow<List<CategoryEntity>>
 
     @Query("SELECT * FROM mirror WHERE repoId = :repoId")

@@ -16,18 +16,12 @@ import com.looker.droidify.compose.appDetail.navigation.appDetail
 import com.looker.droidify.compose.appDetail.navigation.navigateToAppDetail
 import com.looker.droidify.compose.appList.navigation.AppList
 import com.looker.droidify.compose.appList.navigation.appList
-import com.looker.droidify.compose.appList.navigation.navigateToAppList
 import com.looker.droidify.compose.home.navigation.home
-import com.looker.droidify.compose.repoDetail.navigation.navigateToRepoDetail
-import com.looker.droidify.compose.repoDetail.navigation.repoDetail
-import com.looker.droidify.compose.repoEdit.navigation.navigateToRepoEdit
-import com.looker.droidify.compose.repoEdit.navigation.repoEdit
-import com.looker.droidify.compose.repoList.navigation.navigateToRepoList
-import com.looker.droidify.compose.repoList.navigation.repoList
 import com.looker.droidify.compose.settings.navigation.navigateToSettings
 import com.looker.droidify.compose.settings.navigation.settings
 import com.looker.droidify.compose.theme.DroidifyTheme
 import com.looker.droidify.data.RepoRepository
+import com.looker.droidify.datastore.SettingsRepository
 import com.looker.droidify.model.Repository
 import com.looker.droidify.utility.common.requestNotificationPermission
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,15 +35,30 @@ class MainComposeActivity : ComponentActivity() {
     @Inject
     lateinit var repository: RepoRepository
 
+    @Inject
+    lateinit var settingsRepository: SettingsRepository
+
     private val notificationPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch {
-            if (repository.repos.first().isEmpty()) {
-                Repository.defaultRepositories.forEach {
-                    repository.insertRepo(it.address, it.fingerprint, null, null, it.name, it.description)
+            val repos = repository.repos.first()
+            if (repos.isEmpty()) {
+                val defaultRepo = Repository.defaultRepositories.first()
+                repository.insertRepo(
+                    defaultRepo.address,
+                    defaultRepo.fingerprint,
+                    null,
+                    null,
+                    defaultRepo.name,
+                    defaultRepo.description
+                )
+                // Enable the repo
+                val insertedRepos = repository.repos.first()
+                insertedRepos.firstOrNull()?.let {
+                    settingsRepository.setRepoEnabled(it.id, true)
                 }
             }
         }
@@ -65,35 +74,19 @@ class MainComposeActivity : ComponentActivity() {
                         startDestination = AppList,
                     ) {
                         home(
-                            onNavigateToApps = { navController.navigateToAppList() },
-                            onNavigateToRepos = { navController.navigateToRepoList() },
+                            onNavigateToApps = { navController.navigate(AppList) },
                             onNavigateToSettings = { navController.navigateToSettings() },
                         )
                         appList(
                             onAppClick = { packageName ->
                                 navController.navigateToAppDetail(packageName)
                             },
-                            onNavigateToRepos = { navController.navigateToRepoList() },
                             onNavigateToSettings = { navController.navigateToSettings() },
-                        )
-
-                        repoList(
-                            onRepoClick = { repoId -> navController.navigateToRepoDetail(repoId) },
-                            onBackClick = { navController.popBackStack() }
                         )
 
                         appDetail(
                             onBackClick = { navController.popBackStack() },
                         )
-
-                        repoDetail(
-                            onBackClick = { navController.popBackStack() },
-                            onEditClick = { repoId ->
-                                navController.navigateToRepoEdit(repoId)
-                            },
-                        )
-
-                        repoEdit(onBackClick = { navController.popBackStack() })
 
                         settings(onBackClick = { navController.popBackStack() })
                     }
